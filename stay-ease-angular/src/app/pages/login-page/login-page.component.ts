@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {ToastService} from '../../helpers/toast/toast.service';
 import {AppService} from '../../app.service';
 
@@ -14,17 +14,36 @@ import {AppService} from '../../app.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
-  formData = {
+export class LoginPageComponent implements OnInit {
+  pageTitle = 'Login';
+  loginFormData = {
     email: '',
     password: ''
   };
-
-  constructor(private toastService: ToastService, private appService: AppService) {
+  registerFormData = {
+    email: '',
+    password: '',
+    confirmPassword: ''
   }
 
-  handleFormSubmit() {
-    if (this.formData.email === '' || this.formData.password === '') {
+  constructor(private router: Router, private toastService: ToastService, private appService: AppService) {
+  }
+
+  ngOnInit(): void {
+    this.appService.disableHeader();
+    this.pageTitle = this.router.url === '/login' ? 'Login' : 'Register';
+  }
+
+  handleFormSubmit(submissionType: string): void {
+    if (submissionType === 'login') {
+      this.login();
+    } else {
+      this.register();
+    }
+  }
+
+  login(): void {
+    if (this.loginFormData.email === '' || this.loginFormData.password === '') {
       this.toastService.showError('Please fill in all fields');
       return
     }
@@ -32,4 +51,16 @@ export class LoginPageComponent {
     // TODO: Handle form submission
   }
 
+  register(): void {
+    if (this.registerFormData.email === '' || this.registerFormData.password === '' || this.registerFormData.confirmPassword === '') {
+      this.toastService.showError('Please fill in all fields');
+      return
+    }
+    if (this.registerFormData.password !== this.registerFormData.confirmPassword) {
+      this.toastService.showError('Passwords do not match');
+      return
+    }
+    this.appService.enableHeader();
+    // TODO: Handle form submission
+  }
 }

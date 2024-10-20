@@ -1,29 +1,56 @@
 <div class="flex grow items-center justify-around p-4 md:p-0">
   <div class="mb-40">
-    <h1 class="mb-4 text-center text-4xl">Login</h1>
-    <form class="mx-auto max-w-md" (ngSubmit)="handleFormSubmit()">
-      <input
-        name="email"
-        type="email"
-        placeholder="your@email.com"
-        [(ngModel)]="formData.email"
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="password"
-        [(ngModel)]="formData.password"
-        required
-      />
-      <button class="primary my-4">Login</button>
+    <h1 class="mb-4 text-center text-4xl">{{ pageTitle }}</h1>
+    <form class="mx-auto max-w-md" (ngSubmit)="handleFormSubmit(pageTitle === 'Login' ? 'login' : 'register')">
+      @if (pageTitle === 'Login') {
+        <input
+          name="email"
+          type="email"
+          placeholder="your@email.com"
+          [(ngModel)]="loginFormData.email"
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="password"
+          [(ngModel)]="loginFormData.password"
+          required
+        />
+        <button class="primary my-4">Login</button>
+      } @else {
+        <input
+          name="email"
+          type="email"
+          placeholder="your@email.com"
+          [(ngModel)]="registerFormData.email"
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="password"
+          [(ngModel)]="registerFormData.password"
+          required
+        />
+        <input
+          name="confirmPassword"
+          type="password"
+          placeholder="confirm password"
+          [(ngModel)]="registerFormData.confirmPassword"
+          required
+        />
+        <button class="primary my-4">Register</button>
+      }
     </form>
 
-    <div class="py-2 text-center text-gray-500">
-      Don't have an account yet?
-      <a class="text-black underline" routerLink="/register">
-        Register now
-      </a>
-    </div>
+    <p class="py-2 text-center text-gray-500">
+      @if (pageTitle === 'Login') {
+        Don't have an account? <a routerLink="/register" class="underline">Register</a>
+      } @else {
+        Already have an account? <a routerLink="/login" class="underline">Login</a>
+      }
+    </p>
+
   </div>
 </div>
