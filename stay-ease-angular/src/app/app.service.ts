@@ -11,12 +11,14 @@ export class AppService {
 
   constructor() { }
 
-  public enableHeader() {
+  public enableHeaderAndFooter() {
     this.showHeader.next(true);
+    this.showFooter.next(true);
   }
 
-  public disableHeader() {
+  public disableHeaderAndFooter() {
     this.showHeader.next(false);
+    this.showFooter.next(false);
   }
 
 }
