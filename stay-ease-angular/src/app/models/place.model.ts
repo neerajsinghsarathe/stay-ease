@@ -5,8 +5,8 @@ export interface Place {
   address: string;
   perks: string[];
   extraInfo: string;
-  checkIn?: number | null;
-  checkOut?: number | null;
+  checkIn?: number | string | null;
+  checkOut?: number | string | null;
   maxGuests: number;
   price: number;
   description: string;
