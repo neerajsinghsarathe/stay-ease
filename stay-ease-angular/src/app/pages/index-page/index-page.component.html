@@ -1,1 +1,35 @@
-<p>index-page works!</p>
+<div class="grid grid-cols-1 justify-items-center py-32 px-4 md:grid-cols-2 md:gap-0 lg:grid-cols-3 lg:gap-2 xl:grid-cols-4 xl:gap-10">
+
+  @if (places.length > 0) {
+    @for (place of places; track place._id) {
+      <app-place-card [place]="place"></app-place-card>
+    }
+  } @else {
+    <div class="absolute left-1/2 right-1/2 top-40 flex  w-full -translate-x-1/2 transform flex-col p-10  md:w-1/2">
+      <h1 class="text-3xl font-semibold">Result not found!</h1>
+      <p class="text-lg font-semibold">
+        Sorry, we couldn't find the place you're looking for.
+      </p>
+      <button class="mt-4 w-32 rounded-full bg-primary p-2 text-white">
+        <a routerLink="/" class="flex items-center justify-center gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-5 w-5"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Go back
+        </a>
+      </button>
+    </div>
+  }
+</div>

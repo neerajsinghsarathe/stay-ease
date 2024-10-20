@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './helpers/header/header.component';
 import {FooterComponent} from './helpers/footer/footer.component';
@@ -14,21 +14,23 @@ import {ToastComponent} from './helpers/toast/toast.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'stay-ease-angular';
   showHeader!: boolean;
   showFooter!: boolean;
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.appService.showHeader.subscribe((showHeader: any) => {
       this.showHeader = showHeader;
+      this.cdRef.detectChanges();
     });
 
     this.appService.showFooter.subscribe((showFooter: any) => {
       this.showFooter = showFooter;
+      this.cdRef.detectChanges();
     });
   }
 
