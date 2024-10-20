@@ -1,0 +1,29 @@
+<div class="flex grow items-center justify-around p-4 md:p-0">
+  <div class="mb-40">
+    <h1 class="mb-4 text-center text-4xl">Login</h1>
+    <form class="mx-auto max-w-md" (ngSubmit)="handleFormSubmit()">
+      <input
+        name="email"
+        type="email"
+        placeholder="your@email.com"
+        [(ngModel)]="formData.email"
+        required
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="password"
+        [(ngModel)]="formData.password"
+        required
+      />
+      <button class="primary my-4">Login</button>
+    </form>
+
+    <div class="py-2 text-center text-gray-500">
+      Don't have an account yet?
+      <a class="text-black underline" routerLink="/register">
+        Register now
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,10 @@
-<app-header></app-header>
-<div class="mx-auto flex min-h-screen max-w-screen-xl flex-col">
+<app-toast></app-toast>
+@if (showHeader) {
+  <app-header></app-header>
+}
+<div class="mx-auto flex min-h-screen max-w-screen-xl flex-col justify-center">
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+@if (showFooter) {
+  <app-footer></app-footer>
+}
