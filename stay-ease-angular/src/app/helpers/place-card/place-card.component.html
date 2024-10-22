@@ -1,7 +1,7 @@
 <a [routerLink]="['/place', place._id]" class="m-4 flex flex-col md:m-2 xl:m-0">
   <div class="card">
-    @if (place.photos?.[0]){
-      <img [src]="place.photos?.[0]" class="h-4/5 w-full rounded-xl object-cover"  alt=""/>
+    @if (place.photos[0]){
+      <img [src]="place.photos[0]" class="h-4/5 w-full rounded-xl object-cover"  alt=""/>
     }
     <h2 class="truncate font-bold">{{ place.address }}</h2>
     <h3 class="truncate text-sm text-gray-500">{{ place.title }}</h3>
