@@ -1,0 +1,19 @@
+<div>
+  <!-- DatePickerWithRange component -->
+<!--  <app-date-picker-with-range [(dateRange)]="dateRange"></app-date-picker-with-range>-->
+
+  <!-- Form for booking data -->
+  <form>
+    <label for="noOfGuests">Number of Guests</label>
+    <input type="number" id="noOfGuests" [(ngModel)]="bookingData.noOfGuests" name="noOfGuests">
+
+    <label for="name">Name</label>
+    <input type="text" id="name" [(ngModel)]="bookingData.name" name="name">
+
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" [(ngModel)]="bookingData.phone" name="phone">
+  </form>
+
+  <!-- Display number of nights -->
+  <p>Number of nights: {{ numberOfNights }}</p>
+</div>

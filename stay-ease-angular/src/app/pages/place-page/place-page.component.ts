@@ -1,16 +1,39 @@
 import {Component, OnInit} from '@angular/core';
 import {Place} from '../../models/place.model';
 import {AppService} from '../../app.service';
+import {AddressLinkComponent} from '../../helpers/address-link/address-link.component';
+import {PlaceGalleryComponent} from '../../helpers/place-gallery/place-gallery.component';
+import {PerksWidgetComponent} from '../../helpers/perks-widget/perks-widget.component';
+import {BookingWidgetComponent} from '../../helpers/booking-widget/booking-widget.component';
 
 @Component({
   selector: 'app-place-page',
   standalone: true,
-  imports: [],
+  imports: [
+    AddressLinkComponent,
+    PlaceGalleryComponent,
+    PerksWidgetComponent,
+    BookingWidgetComponent
+  ],
   templateUrl: './place-page.component.html',
   styleUrl: './place-page.component.css'
 })
 export class PlacePageComponent implements OnInit{
-  place!: Place;
+  place: Place = {
+    "_id": "",
+    "owner": "",
+    "title": "",
+    "address": "",
+    "perks": [],
+    "extraInfo": "",
+    "checkIn": 0,
+    "checkOut": 0,
+    "maxGuests": 0,
+    "price": 0,
+    "__v": 0,
+    "description": "",
+    "photos": []
+  };
 
   constructor(private appService: AppService) {}
 
@@ -25,7 +48,7 @@ export class PlacePageComponent implements OnInit{
         "enterence",
         "wifi",
         "radio",
-        "tv"
+        "tv",
       ],
       "extraInfo": "-Check-in time is 1pm & Check-out time is 10 am. Early check-in or late checkout is permitted based on availability and prior intimation.\n*Based on availability, early checkin is permitted from 10am onwards. If you wish to check-in before 10am, an early checkin fee will be applicable.\n*Late checkout is permitted based on availability and a fee may be applicable based on checkout time. Please contact host regarding the same.",
       "checkIn": 13,
