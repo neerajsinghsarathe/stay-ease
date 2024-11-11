@@ -1298,10 +1298,10 @@ export class IndexPageComponent implements OnInit {
       "__v": 0
     }
   ];
-  constructor(private appService: AppService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.appService.enableHeaderAndFooter();
+
   }
 
 }

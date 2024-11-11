@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -68,6 +69,10 @@ button {
 
 button.primary {
   @apply w-full rounded-[10px] bg-primary p-2 text-white;
+}
+
+button.secondary {
+  @apply w-1/4 rounded-[10px] bg-secondary p-2 text-black;
 }
 
 button.social {

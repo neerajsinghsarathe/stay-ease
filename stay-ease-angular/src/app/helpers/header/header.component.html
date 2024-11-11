@@ -42,10 +42,9 @@
       </svg>
 
       <div class="z-10 h-[35px] w-[35px] overflow-hidden rounded-full">
-        <ng-container *ngIf="user; else guestIcon">
+        @if (user) {
           <img class="w-10 h-10 rounded-full" src="https://res.cloudinary.com/rahul4019/image/upload/v1695133265/pngwing.com_zi4cre.png" alt="">
-        </ng-container>
-        <ng-template #guestIcon>
+        } @else {
           <svg
             fill="#858080"
             version="1.1"
@@ -76,7 +75,7 @@
               />
             </g>
           </svg>
-        </ng-template>
+        }
       </div>
     </a>
   </div>

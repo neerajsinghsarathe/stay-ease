@@ -6,8 +6,8 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class AppService {
 
-  showHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  showFooter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  showHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  showFooter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor() { }
 

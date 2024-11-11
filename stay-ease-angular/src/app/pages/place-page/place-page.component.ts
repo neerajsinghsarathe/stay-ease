@@ -35,10 +35,9 @@ export class PlacePageComponent implements OnInit{
     "photos": []
   };
 
-  constructor(private appService: AppService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.appService.enableHeaderAndFooter();
     this.place = {
       "_id": "64116bea6f6b01ef935b1cb7",
       "owner": "63d51892fe815b9f54e7bea6",
