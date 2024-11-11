@@ -6,6 +6,7 @@ import {PlacePageComponent} from './pages/place-page/place-page.component';
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {AccountPageComponent} from './pages/account-page/account-page.component';
 import {BookingsPageComponent} from './pages/bookings-page/bookings-page.component';
+import {PlacesPageComponent} from './pages/places-page/places-page.component';
 
 export const routes: Routes = [
   {
@@ -42,7 +43,7 @@ export const routes: Routes = [
       },
       {
         path: 'places',
-        component: ProfilePageComponent
+        component: PlacesPageComponent
       }
     ]
   },
