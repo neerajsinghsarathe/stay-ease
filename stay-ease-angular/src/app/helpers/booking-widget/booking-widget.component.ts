@@ -16,7 +16,7 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class BookingWidgetComponent implements OnInit {
   @Input() place!: Place;
-  dateRange = { from: null, to: null };
+  dateRange = { checkIn: null, checkOut: null };
   bookingData = {
     noOfGuests: 1,
     name: '',
@@ -24,6 +24,7 @@ export class BookingWidgetComponent implements OnInit {
   };
   redirect = '';
   user!: User;
+  numberOfNights: number = 0;
 
 
   constructor(
@@ -40,10 +41,12 @@ export class BookingWidgetComponent implements OnInit {
     });*/
   }
 
-  get numberOfNights(): number {
-    return this.dateRange.from && this.dateRange.to
-      ? this.differenceInDays(new Date(this.dateRange.to), new Date(this.dateRange.from))
+  calculateNumberOfNights(): void {
+    console.log(this.dateRange);
+    this.numberOfNights = this.dateRange.checkIn && this.dateRange.checkOut
+      ? this.differenceInDays(new Date(this.dateRange.checkIn), new Date(this.dateRange.checkOut))
       : 0;
+    console.log(this.numberOfNights);
   }
 
   differenceInDays(date1: Date, date2: Date): number {

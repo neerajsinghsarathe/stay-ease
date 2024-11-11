@@ -1,19 +1,58 @@
-<div>
-  <!-- DatePickerWithRange component -->
-<!--  TODO: Add Date Range picker here -->
-
-  <!-- Form for booking data -->
-  <form>
-    <label for="noOfGuests">Number of Guests</label>
-    <input type="number" id="noOfGuests" [(ngModel)]="bookingData.noOfGuests" name="noOfGuests">
-
-    <label for="name">Name</label>
-    <input type="text" id="name" [(ngModel)]="bookingData.name" name="name">
-
-    <label for="phone">Phone</label>
-    <input type="text" id="phone" [(ngModel)]="bookingData.phone" name="phone">
-  </form>
-
-  <!-- Display number of nights -->
-  <p>Number of nights: {{ numberOfNights }}</p>
+<div class="rounded-2xl bg-white p-4 shadow-xl">
+  <div class="text-center text-xl">
+    Price: <span class="font-semibold">₹{{ place.price }}</span> / per night
+  </div>
+  <div class="mt-4 rounded-2xl border">
+    <div class="flex w-full ">
+      <div class="w-1/2 border-r py-3 px-4">
+        <label>Check-in: </label>
+        <input
+          type="date"
+          name="checkIn"
+          (change)="calculateNumberOfNights()"
+          [(ngModel)]="dateRange.checkIn"
+        />
+      </div>
+      <div class="w-1/2 py-3 px-4">
+        <label>Check-out: </label>
+        <input
+          type="date"
+          name="checkOut"
+          (change)="calculateNumberOfNights()"
+          [(ngModel)]="dateRange.checkOut"
+        />
+      </div>
+    </div>
+    <div class="border-t py-3 px-4">
+      <label>Number of guests: </label>
+      <input
+        type="number"
+        name="noOfGuests"
+        placeholder="Max. guests: {{place.maxGuests}}"
+        min=1
+        max="{{place.maxGuests}}"
+        [(ngModel)]="bookingData.noOfGuests"
+      />
+    </div>
+    <div class="border-t py-3 px-4">
+      <label>Your full name: </label>
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="bookingData.name"
+      />
+      <label>Phone number: </label>
+      <input
+        type="tel"
+        name="phone"
+        [(ngModel)]="bookingData.phone"
+      />
+    </div>
+  </div>
+  <button class="primary mt-4">
+    Book this place
+    @if (numberOfNights > 0) {
+      ₹{{ numberOfNights * place.price }}
+    }
+  </button>
 </div>
