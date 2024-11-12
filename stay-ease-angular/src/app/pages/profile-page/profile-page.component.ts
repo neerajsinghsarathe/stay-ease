@@ -2,12 +2,20 @@ import { Component } from '@angular/core';
 import {NavigationTabsComponent} from '../../helpers/navigation-tabs/navigation-tabs.component';
 import {User} from '../../models/user.model';
 import {Router} from '@angular/router';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+import {Button} from 'primeng/button';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   imports: [
-    NavigationTabsComponent
+    NavigationTabsComponent,
+    DialogModule,
+    InputTextModule,
+    Button,
+    FormsModule
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css'
@@ -20,7 +28,14 @@ export class ProfilePageComponent {
     password: '',
     profileImg: ''
   };
-  pageName: string = 'profile';
+  formData: any = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    profileImg: ''
+  };
+  visible: boolean = false;
 
   constructor(private router: Router) {
     // this.user = JSON.parse(localStorage.getItem('user'));
@@ -28,5 +43,13 @@ export class ProfilePageComponent {
 
   handleLogout() {
     this.router.navigate(['/login']).then(r => localStorage.clear());
+  }
+
+  showHideEditPageDialog() {
+    this.visible = !this.visible;
+  }
+
+  handleEditProfile() {
+
   }
 }
