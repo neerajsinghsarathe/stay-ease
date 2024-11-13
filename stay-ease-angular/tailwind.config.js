@@ -10,9 +10,12 @@ module.exports = {
       padding: '2rem',
       screens: {
         '2xl': '1400px',
-      },
+      }
     },
     extend: {
+      fontFamily: {
+        sans: ['Alkatra', 'sans-serif'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -20,7 +23,7 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#F5385d',
+          DEFAULT: '#ECAB55',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
