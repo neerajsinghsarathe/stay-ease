@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './helpers/header/header.component';
 import {FooterComponent} from './helpers/footer/footer.component';
 import {SpinnerComponent} from './helpers/spinner/spinner.component';
@@ -19,18 +19,13 @@ export class AppComponent implements OnInit {
   showHeader!: boolean;
   showFooter!: boolean;
 
-  constructor(private appService: AppService, private cdRef: ChangeDetectorRef) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.appService.showHeader.subscribe((showHeader: any) => {
-      this.showHeader = showHeader;
-      this.cdRef.detectChanges();
-    });
-
-    this.appService.showFooter.subscribe((showFooter: any) => {
-      this.showFooter = showFooter;
-      this.cdRef.detectChanges();
+    this.router.events.subscribe((event: any) => {
+      this.showHeader = event.url !== '/login' && event.url !== '/register';
+      this.showFooter = event.url !== '/login' && event.url !== '/register';
     });
   }
 

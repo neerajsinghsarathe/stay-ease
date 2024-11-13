@@ -30,7 +30,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.disableHeaderAndFooter();
     this.pageTitle = this.router.url === '/login' ? 'Login' : 'Register';
   }
 
@@ -47,7 +46,6 @@ export class LoginPageComponent implements OnInit {
       this.toastService.showError('Please fill in all fields');
       return
     }
-    this.appService.disableHeaderAndFooter();
     // TODO: Handle form submission
   }
 
@@ -60,7 +58,6 @@ export class LoginPageComponent implements OnInit {
       this.toastService.showError('Passwords do not match');
       return
     }
-    this.appService.enableHeaderAndFooter();
     // TODO: Handle form submission
   }
 }
