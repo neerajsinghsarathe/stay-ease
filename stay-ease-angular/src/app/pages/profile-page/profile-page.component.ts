@@ -35,7 +35,7 @@ export class ProfilePageComponent {
     confirmPassword: '',
     profileImg: ''
   };
-  visible: boolean = false;
+  viewEditProfileModal: boolean = false;
 
   constructor(private router: Router) {
     // this.user = JSON.parse(localStorage.getItem('user'));
@@ -46,7 +46,7 @@ export class ProfilePageComponent {
   }
 
   showHideEditPageDialog() {
-    this.visible = !this.visible;
+    this.viewEditProfileModal = !this.viewEditProfileModal;
   }
 
   handleEditProfile() {
