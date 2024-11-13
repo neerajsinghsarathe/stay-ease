@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Place} from '../../models/place.model';
-import {AppService} from '../../app.service';
 import {AddressLinkComponent} from '../../helpers/address-link/address-link.component';
 import {PlaceGalleryComponent} from '../../helpers/place-gallery/place-gallery.component';
 import {PerksWidgetComponent} from '../../helpers/perks-widget/perks-widget.component';

@@ -1,0 +1,23 @@
+<div class="mt-2 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+  @for (perk of perks; track perk) {
+    <label class="flex cursor-pointer items-center gap-2 rounded-2xl border p-4">
+      <input
+        type="checkbox"
+        [checked]="selected.includes(perk.name)"
+        [name]="perk.name"
+        (change)="handleFormDataChange($event)"
+      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+        [innerHTML]="perk.icon"
+      ></svg>
+      <span>{{ perk.label }}</span>
+    </label>
+  }
+
+</div>

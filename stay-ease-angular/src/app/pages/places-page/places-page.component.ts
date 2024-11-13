@@ -2,18 +2,36 @@ import { Component } from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {InfoCardComponent} from '../../helpers/info-card/info-card.component';
 import {Place} from '../../models/place.model';
+import {DialogModule} from 'primeng/dialog';
+import {PlacesFormPageComponent} from '../places-form-page/places-form-page.component';
 
 @Component({
   selector: 'app-places-page',
   standalone: true,
   imports: [
     RouterLink,
-    InfoCardComponent
+    InfoCardComponent,
+    DialogModule,
+    PlacesFormPageComponent
   ],
   templateUrl: './places-page.component.html',
   styleUrl: './places-page.component.css'
 })
 export class PlacesPageComponent {
+  displayModal: boolean = false;
+  selectedPlace?: Place = {
+    "_id": "",
+    "owner": "",
+    "title": "",
+    "address": "",
+    "photos": [],
+    "description": "",
+    "perks": [],
+    "extraInfo": "",
+    "maxGuests": 0,
+    "price": 0,
+    "__v": 0
+  };
   places: Place[] = [
     {
       "_id": "67325949a2fb5c8ca814b376",
@@ -40,4 +58,8 @@ export class PlacesPageComponent {
     }
   ];
 
+  onPlaceFormModal(place?: Place): void {
+    this.displayModal = true;
+    this.selectedPlace = place;
+  }
 }

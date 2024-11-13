@@ -1,8 +1,8 @@
 <div class="container h-dvh w-11/12">
   <div class="text-center">
     <a
-      class="inline-flex gap-1 rounded-full bg-primary py-2 px-6 text-white"
-      [routerLink]="['/account/places/new']"
+      class="inline-flex gap-1 rounded-full bg-primary py-2 px-6 text-white cursor-pointer"
+      (click)="onPlaceFormModal()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,12 @@
   <div class="mx-4 mt-4">
     @if (places.length > 0) {
       @for (place of places; track place._id) {
-        <app-info-card [place]="place"></app-info-card>
+        <app-info-card (click)="onPlaceFormModal(place)" [place]="place"></app-info-card>
       }
     }
   </div>
 </div>
+
+<p-dialog header="Edit place" modal="true" [(visible)]="displayModal" draggable="false" [style]="{ width: '80vw' }">
+  <app-places-form-page [place]="selectedPlace"></app-places-form-page>
+</p-dialog>

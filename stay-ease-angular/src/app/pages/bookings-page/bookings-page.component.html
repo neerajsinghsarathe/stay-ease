@@ -2,7 +2,7 @@
   @if (bookings.length > 0) {
     @for (booking of bookings; track booking._id) {
       <div
-        (click)="viewBooking(booking._id)"
+        (click)="viewBooking(booking)"
         class="w-2/3 mx-4 my-8 flex h-28 gap-4 overflow-hidden rounded-2xl bg-gray-200 md:h-40 lg:mx-0 cursor-pointer"
       >
         <div class="w-2/6 md:w-2/6">

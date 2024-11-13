@@ -1,0 +1,65 @@
+@if (!loading) {
+  <div class="p-4">
+    <form [formGroup]="formData" (ngSubmit)="savePlace()">
+      <div>
+        <h2 class="mt-4 text-2xl">Title</h2>
+        <p class="text-sm text-gray-500">title for your place. Should be short and catchy as in advertisement</p>
+        <input type="text" formControlName="title" placeholder="title, for example: My lovely apt"/>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Address</h2>
+        <p class="text-sm text-gray-500">address to this place</p>
+        <input type="text" formControlName="address" placeholder="address"/>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Photos</h2>
+        <p class="text-sm text-gray-500">more = better</p>
+        <!--TODO: Add Photo Uploader for the places-->
+        <!--app-photos-uploader [addedPhotos]="addedPhotos" (photosChange)="addedPhotos = $event"></app-photos-uploader>-->
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Description</h2>
+        <p class="text-sm text-gray-500">description of the place</p>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Perks</h2>
+        <p class="text-sm text-gray-500">select all the perks of your place</p>
+        <app-perks [selected]="formData.get('perks')?.value" (perksChange)="formData.get('perks')?.setValue($event)"></app-perks>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Extra info</h2>
+        <p class="text-sm text-gray-500">house rules, etc</p>
+        <textarea formControlName="extraInfo"></textarea>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Number of guests & Price</h2>
+        <p class="text-sm text-gray-500">Specify the maximum number of guests so that the client stays within the
+          limit.</p>
+        <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
+          <div>
+            <h3 class="mt-2 -mb-1">Max no. of guests</h3>
+            <input type="number" formControlName="maxGuests" placeholder="1"/>
+          </div>
+          <div>
+            <h3 class="mt-2 -mb-1">Price per night</h3>
+            <input type="number" formControlName="price" placeholder="1"/>
+          </div>
+        </div>
+      </div>
+
+      <button class="mx-auto my-4 flex rounded-full bg-primary py-3 px-20 text-xl font-semibold text-white">
+        Save
+      </button>
+    </form>
+  </div>
+}
+@if (loading) {
+  <p-spinner></p-spinner>
+}
