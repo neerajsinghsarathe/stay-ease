@@ -20,23 +20,41 @@ export class HttpService {
     localStorage.setItem('token', token);
   }
 
-  get(url: string) {
+  getUser() {
+    return localStorage.getItem('user');
+  }
+
+  setUser(user: string) {
+    localStorage.setItem('user', user);
+  }
+
+  get(url: string, requireToken: boolean = false) {
+    if (requireToken) {
+      const token = this.getToken();
+      if (token) {
+        return this.http.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
+    }
     return this.http.get(url);
   }
 
-  post(url: string, data: any) {
+  post(url: string, data: any, requireToken: boolean = false) {
     return this.http.post(url, data);
   }
 
-  put(url: string, data: any) {
+  put(url: string, data: any, requireToken: boolean = false) {
     return this.http.put(url, data);
   }
 
-  delete(url: string) {
+  delete(url: string, requireToken: boolean = false) {
     return this.http.delete(url);
   }
 
-  patch(url: string, data: any) {
+  patch(url: string, data: any, requireToken: boolean = false) {
     return this.http.patch(url, data);
   }
 }

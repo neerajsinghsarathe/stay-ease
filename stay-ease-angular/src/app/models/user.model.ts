@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   dob?: string;
-  password: string;
+  password?: string;
   phoneNumber?: string;
   profileImg?: string;
   created_at?: string;
