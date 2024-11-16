@@ -19,7 +19,7 @@ import {BookingWidgetComponent} from '../../helpers/booking-widget/booking-widge
 })
 export class PlacePageComponent implements OnInit{
   place: Place = {
-    "_id": "",
+    "_id": 0,
     "owner": "",
     "title": "",
     "address": "",
@@ -38,7 +38,7 @@ export class PlacePageComponent implements OnInit{
 
   ngOnInit(): void {
     this.place = {
-      "_id": "64116bea6f6b01ef935b1cb7",
+      "_id": 1,
       "owner": "63d51892fe815b9f54e7bea6",
       "title": "Cider Chalet-F: 2BRK MountainView Apartment",
       "address": "Manali, Himachal Pradesh, India",

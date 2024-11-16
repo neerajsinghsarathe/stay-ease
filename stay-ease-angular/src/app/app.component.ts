@@ -1,10 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './helpers/header/header.component';
 import {FooterComponent} from './helpers/footer/footer.component';
 import {SpinnerComponent} from './helpers/spinner/spinner.component';
 import {CommonModule} from '@angular/common';
-import {AppService} from './app.service';
 import {ToastComponent} from './helpers/toast/toast.component';
 
 @Component({
@@ -15,7 +14,7 @@ import {ToastComponent} from './helpers/toast/toast.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'stay-ease-angular';
+  title = 'stay-ease';
   showHeader!: boolean;
   showFooter!: boolean;
 

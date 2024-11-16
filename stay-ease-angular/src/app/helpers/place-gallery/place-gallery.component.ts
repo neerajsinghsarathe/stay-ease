@@ -10,7 +10,7 @@ import {Place} from '../../models/place.model';
 })
 export class PlaceGalleryComponent {
   @Input() place: Place = {
-    "_id": "",
+    "_id": 0,
     "owner": "",
     "title": "",
     "address": "",

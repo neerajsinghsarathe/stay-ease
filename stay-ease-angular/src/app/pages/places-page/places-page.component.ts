@@ -20,7 +20,7 @@ import {PlacesFormPageComponent} from '../places-form-page/places-form-page.comp
 export class PlacesPageComponent {
   displayModal: boolean = false;
   selectedPlace?: Place = {
-    "_id": "",
+    "_id": 0,
     "owner": "",
     "title": "",
     "address": "",
@@ -34,7 +34,7 @@ export class PlacesPageComponent {
   };
   places: Place[] = [
     {
-      "_id": "67325949a2fb5c8ca814b376",
+      "_id": 1,
       "owner": "6714cba9d5f656cfe6ceda40",
       "title": "abcd",
       "address": "USA",

@@ -12,7 +12,7 @@ import {NgClass, NgIf} from '@angular/common';
   styleUrl: './place-img.component.css'
 })
 export class PlaceImgComponent {
-  @Input() place!: { _id: string; title: string; description: string, photos: string[] };
+  @Input() place!: { _id: number; title: string; description: string, photos: string[] };
   @Input() index: number = 0;
   @Input() className: string | null = null;
 

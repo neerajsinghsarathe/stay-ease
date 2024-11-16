@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {ToastService} from '../../helpers/toast/toast.service';
-import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-login-page',
@@ -26,7 +25,7 @@ export class LoginPageComponent implements OnInit {
     confirmPassword: ''
   }
 
-  constructor(private router: Router, private toastService: ToastService, private appService: AppService) {
+  constructor(private router: Router, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
@@ -43,7 +42,7 @@ export class LoginPageComponent implements OnInit {
 
   login(): void {
     if (this.loginFormData.email === '' || this.loginFormData.password === '') {
-      this.toastService.showError('Please fill in all fields');
+      this.toastService.showError('Please fill in all fields');      
       return
     }
     // TODO: Handle form submission

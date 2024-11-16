@@ -14,7 +14,7 @@ import {PlaceImgComponent} from '../place-img/place-img.component';
 })
 export class InfoCardComponent {
   @Input() place!: {
-    _id: string,
+    _id: number,
     title: string,
     description: string,
     photos: string[],

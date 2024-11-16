@@ -28,7 +28,7 @@ export class BookingsPageComponent {
       "_id": "673258d1a2fb5c8ca814b365",
       "user": "6714cba9d5f656cfe6ceda40",
       "place": {
-        "_id": "64116bea6f6b01ef935b1cb7",
+        "_id": 1,
         "owner": "63d51892fe815b9f54e7bea6",
         "title": "Cider Chalet-F: 2BRK MountainView Apartment",
         "address": "Manali, Himachal Pradesh, India",
@@ -66,7 +66,7 @@ export class BookingsPageComponent {
     "_id": "",
     "user": "",
     "place": {
-      "_id": "",
+      "_id": 0,
       "owner": "",
       "title": "",
       "address": "",
