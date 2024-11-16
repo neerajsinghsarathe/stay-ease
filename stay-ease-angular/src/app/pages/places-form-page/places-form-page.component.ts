@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {ActivatedRoute, Router} from '@angular/router';
 import {Place} from '../../models/place.model';
 import {PerksComponent} from '../../helpers/perks/perks.component';
+import {ToastService} from '../../helpers/toast/toast.service';
+import {PhotosUploaderComponent} from '../../helpers/photos-uploader/photos-uploader.component';
 
 @Component({
   selector: 'app-places-form-page',
@@ -11,7 +13,8 @@ import {PerksComponent} from '../../helpers/perks/perks.component';
   imports: [
     SpinnerModule,
     ReactiveFormsModule,
-    PerksComponent
+    PerksComponent,
+    PhotosUploaderComponent
   ],
   templateUrl: './places-form-page.component.html',
   styleUrl: './places-form-page.component.css'
@@ -21,13 +24,11 @@ export class PlacesFormPageComponent implements OnInit {
   formData: FormGroup;
   addedPhotos: string[] = [];
   loading = false;
-  redirect = false;
   id: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router
+    private toastService: ToastService
   ) {
     this.formData = this.fb.group({
       title: ['', Validators.required],
@@ -59,12 +60,10 @@ export class PlacesFormPageComponent implements OnInit {
 
   isValidPlaceData(): boolean {
     if (this.formData.invalid) {
-      // this.toastr.error('Please fill out all required fields.');
-      // TODO: Add toastService
+      this.toastService.showError('Please fill all the required fields!');
       return false;
     } else if (this.addedPhotos.length < 5) {
-      // this.toastr.error('Upload at least 5 photos!');
-      // TODO: Add toastService
+      this.toastService.showError('Upload at least 5 photos!');
       return false;
     }
     return true;

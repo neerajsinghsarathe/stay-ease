@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
 import {InfoCardComponent} from '../../helpers/info-card/info-card.component';
 import {Place} from '../../models/place.model';
 import {DialogModule} from 'primeng/dialog';
 import {PlacesFormPageComponent} from '../places-form-page/places-form-page.component';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-places-page',
   standalone: true,
   imports: [
-    RouterLink,
     InfoCardComponent,
     DialogModule,
-    PlacesFormPageComponent
+    PlacesFormPageComponent,
+    FormsModule
   ],
   templateUrl: './places-page.component.html',
   styleUrl: './places-page.component.css'
