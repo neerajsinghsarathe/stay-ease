@@ -49,10 +49,14 @@
       />
     </div>
   </div>
-  <button class="primary mt-4">
-    Book this place
-    @if (numberOfNights > 0) {
-      ₹{{ numberOfNights * place.price }}
-    }
-  </button>
+  @if (numberOfNights < 1 || !bookingData.noOfGuests || !bookingData.name || !bookingData.phone) {
+    <button class="w-full mt-2 p-2 rounded-xl text-white" disabled>Book this place</button>
+  } @else {
+    <button class="primary mt-4" (click)="bookPlace()">
+      Book this place
+      @if (numberOfNights > 0) {
+        ₹{{ numberOfNights * place.price }}
+      }
+    </button>
+  }
 </div>

@@ -27,4 +27,13 @@ export class ToastService {
   public showError(message: string) {
     this.message.next({severity: 'error', summary: 'Error', detail: message});
   }
+
+  public showInfo(message: string) {
+    this.message.next({severity: 'info', summary: 'Info', detail: message});
+  }
+
+  public showWarning(message: string) {
+    this.message.next({severity: 'warn', summary: 'Warning', detail: message});
+  }
+
 }

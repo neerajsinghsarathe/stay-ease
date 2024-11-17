@@ -25,4 +25,8 @@ export class AccountPageService {
   updateUserDetails(data: any) {
     return this.httpService.put(`${this.domainUrl}/User/${this.userId}`, data, true);
   }
+
+  bookPlace(data: any) {
+    return this.httpService.post(`${this.domainUrl}/createbooking`, data, true);
+  }
 }
