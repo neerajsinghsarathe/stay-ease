@@ -18,4 +18,8 @@ export class IndexPageService {
   getPlace(id: string | number) {
     return this.httpService.get(this.domainUrl + '/Hotel/' + id);
   }
+
+  searchPlaces(query: string) {
+    return this.httpService.get(this.domainUrl + '/Hotel/search/' + query);
+  }
 }

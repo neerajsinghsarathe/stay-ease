@@ -14,6 +14,10 @@ export const routes: Routes = [
     component: IndexPageComponent
   },
   {
+    path: 'search',
+    component: IndexPageComponent
+  },
+  {
     path: 'login',
     component: LoginPageComponent
   },

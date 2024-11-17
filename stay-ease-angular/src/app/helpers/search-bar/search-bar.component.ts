@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,7 +14,11 @@ import {FormsModule} from '@angular/forms';
 export class SearchBarComponent {
   searchText: any;
 
-  handleSearch($event?: Event) {
+  constructor(private router: Router) {
+  }
 
+  handleSearch($event?: Event) {
+    // Add params in the url to search
+    this.router.navigate(['/search'], { queryParams: { q: this.searchText } });
   }
 }
