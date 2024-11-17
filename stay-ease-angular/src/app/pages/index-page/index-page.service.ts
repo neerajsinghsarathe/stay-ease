@@ -15,7 +15,7 @@ export class IndexPageService {
     return this.httpService.get(this.domainUrl + '/Hotel');
   }
 
-  getPlace(id: string) {
+  getPlace(id: string | number) {
     return this.httpService.get(this.domainUrl + '/Hotel/' + id);
   }
 }

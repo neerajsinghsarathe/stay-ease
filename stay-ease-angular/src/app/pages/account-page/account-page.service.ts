@@ -29,4 +29,8 @@ export class AccountPageService {
   bookPlace(data: any) {
     return this.httpService.post(`${this.domainUrl}/createbooking`, data, true);
   }
+
+  getBookings() {
+    return this.httpService.get(`${this.domainUrl}/User/bookings/${this.userId}`, true);
+  }
 }
