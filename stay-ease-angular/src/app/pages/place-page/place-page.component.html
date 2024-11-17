@@ -1,7 +1,7 @@
 <div class="mt-4 overflow-x-hidden px-8 pt-20 ">
-  <h1 class="text-3xl">{{ place.title }}</h1>
+  <h1 class="text-3xl mb-2">{{ place.title }}</h1>
 
-  <app-address-link [placeAddress]="'123 Main St, Anytown, USA'" [className]="'custom-class'"></app-address-link>
+  <app-address-link [placeAddress]="place.address" [className]="'mb-3'"></app-address-link>
   <app-place-gallery [place]="place"></app-place-gallery>
 
   <div class="mt-8 mb-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr]">

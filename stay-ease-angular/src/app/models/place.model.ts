@@ -53,7 +53,7 @@ export class PlaceModel implements Place {
     this.address = `${place.address}, ${place.city}, ${place.state}, ${place.pinCode}, ${place.country}`;
     this.perks = place.amenities.split(',') || [];
     this.extraInfo = place.rating || "";
-    this.maxGuests = 0;
+    this.maxGuests = 10;
     this.price = place.price || 0;
     this.description = place.description || "";
     this.photos = place.images || [];
