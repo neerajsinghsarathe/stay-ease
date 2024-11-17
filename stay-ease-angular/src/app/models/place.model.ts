@@ -24,9 +24,11 @@ export interface PlaceAPIModel {
   pinCode: string;
   country: string;
   amenities: string;
+  price: number;
   rating: string;
   ownerId: string;
   isActive: string;
+  images: string[];
 }
 
 export class PlaceModel implements Place {
@@ -52,9 +54,17 @@ export class PlaceModel implements Place {
     this.perks = place.amenities.split(',') || [];
     this.extraInfo = place.rating || "";
     this.maxGuests = 0;
-    this.price = 0;
+    this.price = place.price || 0;
     this.description = place.description || "";
-    this.photos = [];
+    this.photos = place.images || [];
     this.__v = 0;
+  }
+}
+
+export class PlaceModelList {
+  places: Place[];
+
+  constructor(places: PlaceAPIModel[]) {
+    this.places = places.map(place => new PlaceModel(place));
   }
 }
