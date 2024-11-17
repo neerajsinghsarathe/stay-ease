@@ -61,9 +61,6 @@ export class BookingsPageComponent {
     this.accountService.getBookings().subscribe({
       next: (response: any) => {
         this.bookings = new BookingModelList(response.data).bookings;
-      },
-      error: (error: any) => {
-        this.bookings = new BookingModelList(error.error.data).bookings;
       }
     });
   }
