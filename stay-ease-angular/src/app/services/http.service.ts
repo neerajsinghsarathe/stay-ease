@@ -43,18 +43,30 @@ export class HttpService {
   }
 
   post(url: string, data: any, requireToken: boolean = false) {
+    if (requireToken) {
+      return this.http.post(url, data, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+    }
     return this.http.post(url, data);
   }
 
   put(url: string, data: any, requireToken: boolean = false) {
+    if (requireToken) {
+      return this.http.put(url, data, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+    }
     return this.http.put(url, data);
   }
 
   delete(url: string, requireToken: boolean = false) {
+    if (requireToken) {
+      return this.http.delete(url, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+    }
     return this.http.delete(url);
   }
 
   patch(url: string, data: any, requireToken: boolean = false) {
+    if (requireToken) {
+      return this.http.patch(url, data, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+    }
     return this.http.patch(url, data);
   }
 }

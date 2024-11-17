@@ -6,9 +6,11 @@ import {Observable, observeOn} from 'rxjs';
   providedIn: 'root'
 })
 export class AccountPageService {
+  private readonly domainUrl: string;
   private readonly userId: string;
 
   constructor(private httpService: HttpService) {
+    this.domainUrl = this.httpService.getDomainUrl();
     const user = this.httpService.getUser();
     this.userId = user ? JSON.parse(user).userId : '';
   }
@@ -17,10 +19,10 @@ export class AccountPageService {
     if (!this.userId) {
       return new Observable(observeOn => observeOn.error('User not found'));
     }
-    return this.httpService.get(`/user/${this.userId}`, true);
+    return this.httpService.get(`${this.domainUrl}/User/${this.userId}`, true);
   }
 
   updateUserDetails(data: any) {
-    return this.httpService.put(`/user/${this.userId}`, data, true);
+    return this.httpService.put(`${this.domainUrl}/User/${this.userId}`, data, true);
   }
 }

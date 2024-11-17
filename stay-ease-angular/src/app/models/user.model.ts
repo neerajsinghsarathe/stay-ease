@@ -1,6 +1,8 @@
 export interface User {
   id: number;
-  name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   dob?: string;
   password?: string;
@@ -28,7 +30,9 @@ export interface UserAPIModel {
 
 export class UserModel implements User {
   id: number;
-  name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   dob: string;
   password: string;
@@ -40,7 +44,9 @@ export class UserModel implements User {
 
   constructor(user: UserAPIModel) {
     this.id = user.userId || 0;
-    this.name = user.userName || `${user.firstName} ${user.lastName}`;
+    this.userName = user.userName;
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
     this.email = user.email || "";
     this.password = user.userPassword || "";
     this.profileImg = user.profileImg || "";
