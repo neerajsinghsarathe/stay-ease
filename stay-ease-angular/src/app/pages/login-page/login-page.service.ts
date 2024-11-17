@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from '../../services/http.service';
+import {tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class LoginPageService {
   }
 
   login(loginFormData: { email: string, password: string }) {
-    return this.httpService.post(`${this.domainUrl}/Login/user`, loginFormData).pipe((response: any) => {
+    return this.httpService.post(`${this.domainUrl}/Login/user`, loginFormData).pipe(tap((response: any) => {
       if (response.status) {
-        this.httpService.setToken(response.token);
+        this.httpService.setToken(response.token['token1']);
+        this.httpService.setUser(JSON.stringify(response.data));
       }
-      return response;
-    });
+    }));
   }
 
-  register(registerFormData: { email: string, password: string}) {
-    return this.httpService.post(`${this.domainUrl}/register`, registerFormData);
+  register(registerFormData: any) {
+    return this.httpService.post(`${this.domainUrl}/user`, registerFormData);
   }
 }

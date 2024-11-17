@@ -21,7 +21,11 @@ export class LoginPageComponent implements OnInit {
     password: ''
   };
   registerFormData = {
+    userName: '',
+    firstName: '',
+    lastName: '',
     email: '',
+    dateOfBirth: '',
     password: '',
     confirmPassword: ''
   }
@@ -50,7 +54,6 @@ export class LoginPageComponent implements OnInit {
     this.loginPageService.login(this.loginFormData).subscribe({
       next: (response: any) => {
         if (response.status) {
-          this.toastService.showSuccess('Login successful');
           this.router.navigate(['/']);
         } else {
           this.toastService.showError('Invalid email or password');
@@ -63,7 +66,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   register(): void {
-    if (this.registerFormData.email === '' || this.registerFormData.password === '' || this.registerFormData.confirmPassword === '') {
+    if (
+      this.registerFormData.email === '' ||
+      this.registerFormData.password === '' ||
+      this.registerFormData.confirmPassword === '' ||
+      this.registerFormData.userName === '' ||
+      this.registerFormData.firstName === '' ||
+      this.registerFormData.lastName === '' ||
+      this.registerFormData.dateOfBirth === ''
+    ) {
       this.toastService.showError('Please fill in all fields');
       return
     }
@@ -71,17 +82,33 @@ export class LoginPageComponent implements OnInit {
       this.toastService.showError('Passwords do not match');
       return
     }
-    this.loginPageService.register(this.registerFormData).subscribe({
+
+    const body = {
+      "userId": 0,
+      "userName": this.registerFormData.userName,
+      "firstName": this.registerFormData.firstName,
+      "lastName": this.registerFormData.lastName,
+      "userPassword": this.registerFormData.password,
+      "email": this.registerFormData.email,
+      "phoneNumber": "",
+      "dob": this.registerFormData.dateOfBirth,
+      "isActive": true
+
+    };
+
+    this.loginPageService.register(body).subscribe({
       next: (response: any) => {
-        if (response.status) {
-          this.toastService.showSuccess('Registration successful');
-          this.router.navigate(['/']);
-        } else {
+        if (!response.status) {
           this.toastService.showError('Registration failed');
+          return;
         }
+
+        this.loginFormData.email = this.registerFormData.email;
+        this.loginFormData.password = this.registerFormData.password;
+        this.login();
       },
       error: (error: any) => {
-        this.toastService.showError('Registration failed');
+        this.toastService.showError(error.error.data);
       }
     });
   }

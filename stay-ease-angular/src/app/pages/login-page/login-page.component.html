@@ -20,6 +20,40 @@
         <button class="primary my-4">Login</button>
       } @else {
         <input
+          name="username"
+          type="text"
+          placeholder="username"
+          [(ngModel)]="registerFormData.userName"
+          required
+        />
+        <span class="flex gap-4">
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="First Name"
+            required
+            [(ngModel)]="registerFormData.firstName"
+          />
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          placeholder="Last Name"
+          required
+          [(ngModel)]="registerFormData.lastName"
+        />
+        </span>
+        <input
+          name="dateOfBirth"
+          type="text"
+          placeholder="Date of Birth"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+          [(ngModel)]="registerFormData.dateOfBirth"
+          required
+        />
+        <input
           name="email"
           type="email"
           placeholder="your@email.com"
