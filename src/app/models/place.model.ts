@@ -4,14 +4,35 @@ export interface Place {
   title: string;
   address: string;
   perks: string[];
-  extraInfo: string;
+  rating: string;
   checkIn?: number | string | null;
   checkOut?: number | string | null;
   maxGuests: number;
   price: number;
   description: string;
   photos: string[];
+  rooms: Room[]
+  reviews?: Review[];
   __v?: number;
+}
+
+export interface Room {
+  roomId: number;
+  roomType: string;
+  price: number;
+  capacity: number;
+  totalAvailableRooms: number;
+  roomDescription: string;
+}
+
+export interface Review {
+  reviewId: number;
+  rating: number;
+  comment: string;
+  reviewDate: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
 }
 
 export interface PlaceAPIModel {
@@ -29,6 +50,8 @@ export interface PlaceAPIModel {
   ownerId: string;
   isActive: string;
   images: string[];
+  rooms: [],
+  reviews: Review[]
 }
 
 export class PlaceModel implements Place {
@@ -37,13 +60,15 @@ export class PlaceModel implements Place {
   title: string;
   address: string;
   perks: string[];
-  extraInfo: string;
+  rating: string;
   checkIn?: number | string | null;
   checkOut?: number | string | null;
   maxGuests: number;
   price: number;
   description: string;
   photos: string[];
+  rooms: Room[];
+  reviews?: Review[];
   __v?: number;
 
   constructor(place: PlaceAPIModel) {
@@ -52,11 +77,13 @@ export class PlaceModel implements Place {
     this.title = place.name || "";
     this.address = `${place.address}, ${place.city}, ${place.state}, ${place.pinCode}, ${place.country}`;
     this.perks = place.amenities.split(',') || [];
-    this.extraInfo = place.rating || "";
+    this.rating = place.rating || "";
     this.maxGuests = 10;
     this.price = place.price || 0;
     this.description = place.description || "";
     this.photos = place.images || [];
+    this.rooms = place.rooms || [];
+    this.reviews = place.reviews || [];
     this.__v = 0;
   }
 }
@@ -66,5 +93,13 @@ export class PlaceModelList {
 
   constructor(places: PlaceAPIModel[]) {
     this.places = places.map(place => new PlaceModel(place));
+  }
+}
+
+export class ReviewsList {
+  reviews: Review[];
+
+  constructor(reviews: Review[]) {
+    this.reviews = reviews;
   }
 }

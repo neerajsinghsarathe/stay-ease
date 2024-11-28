@@ -22,4 +22,8 @@ export class IndexPageService {
   searchPlaces(query: string) {
     return this.httpService.get(this.domainUrl + '/Hotel/search/' + query);
   }
+
+  getReviews(id: string | number) {
+    return this.httpService.get(this.domainUrl + '/reviews/' + id);
+  }
 }

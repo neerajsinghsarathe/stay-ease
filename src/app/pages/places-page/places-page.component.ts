@@ -27,9 +27,10 @@ export class PlacesPageComponent {
     "photos": [],
     "description": "",
     "perks": [],
-    "extraInfo": "",
+    "rating": "",
     "maxGuests": 0,
     "price": 0,
+    "rooms": [],
     "__v": 0
   };
   places: Place[] = [
@@ -51,9 +52,10 @@ export class PlacesPageComponent {
         "wifi",
         "enterence"
       ],
-      "extraInfo": "no rules",
+      "rating": "no rules",
       "maxGuests": 10,
       "price": 500,
+      "rooms": [],
       "__v": 0
     }
   ];

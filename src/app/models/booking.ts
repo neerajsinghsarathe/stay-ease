@@ -46,9 +46,10 @@ export class BookingModel implements Booking {
       photos: [booking.hotelImage],
       description: '',
       perks: [],
-      extraInfo: '',
+      rating: '',
       maxGuests: 0,
       price: 0,
+      rooms: [],
       __v: 0
     };
     this.checkIn = booking.checkInDate;

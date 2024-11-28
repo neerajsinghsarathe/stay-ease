@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {User, UserModel} from '../../models/user.model';
-import {Place} from '../../models/place.model';
+import {Place, Room} from '../../models/place.model';
 import {Router, RouterLink} from '@angular/router';
 import {AccountPageService} from '../../pages/account-page/account-page.service';
 import {ToastService} from '../toast/toast.service';
@@ -21,7 +21,8 @@ export class BookingWidgetComponent implements OnInit {
   bookingData = {
     noOfGuests: 1,
     name: '',
-    phone: ''
+    phone: '',
+    roomType: '',
   };
   user!: User;
   numberOfNights: number = 0;
@@ -63,13 +64,24 @@ export class BookingWidgetComponent implements OnInit {
       this.toastService.showWarning('Please login to book a place');
       return;
     }
+    let room: Room | undefined;
+    if(this.bookingData.roomType !== '') {
+       room = this.place.rooms.find(room => room.roomType === this.bookingData.roomType);
+    } else {
+      room = this.place.rooms[0];
+    }
+
+    if(room?.capacity && room?.capacity < this.bookingData.noOfGuests) {
+      this.toastService.showError('Number of guests exceed room capacity');
+      return;
+    }
 
     const body ={
       "UserID": this.user.id,
       "HotelID": this.place._id,
       "Rooms": [
       {
-        "RoomID": 1,
+        "RoomID": room?.roomId ?? 1,
         "CheckInDate": this.dateRange.checkIn,
         "CheckOutDate": this.dateRange.checkOut,
       }
@@ -88,5 +100,10 @@ export class BookingWidgetComponent implements OnInit {
       }
     });
 
+  }
+
+  getRoomPrice() {
+    const room = this.place.rooms.find(room => room.roomType === this.bookingData.roomType);
+    this.place.price = room?.price ?? 0;
   }
 }

@@ -33,6 +33,14 @@
         max="{{place.maxGuests}}"
         [(ngModel)]="bookingData.noOfGuests"
       />
+      <label>Room Type</label>
+      <select name="roomType" [(ngModel)]="bookingData.roomType" (change)="getRoomPrice()">
+        @for (room of place.rooms; track room.roomId) {
+          <option [value]="room.roomType">
+            {{ room.roomType }}
+          </option>
+        }
+      </select>
     </div>
     <div class="border-t py-3 px-4">
       <label>Your full name: </label>

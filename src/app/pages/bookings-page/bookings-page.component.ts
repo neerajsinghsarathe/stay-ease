@@ -40,9 +40,10 @@ export class BookingsPageComponent {
       "photos": [],
       "description": "",
       "perks": [],
-      "extraInfo": "",
+      "rating": "",
       "maxGuests": 0,
       "price": 0,
+      "rooms": [],
       "__v": 0
     },
     "checkIn": new Date(),
@@ -55,8 +56,7 @@ export class BookingsPageComponent {
 
   constructor(
     private indexPageService: IndexPageService,
-    private accountService: AccountPageService,
-    private toastService: ToastService
+    private accountService: AccountPageService
   ) {
     this.accountService.getBookings().subscribe({
       next: (response: any) => {
@@ -88,9 +88,10 @@ export class BookingsPageComponent {
         "photos": [],
         "description": "",
         "perks": [],
-        "extraInfo": "",
+        "rating": "",
         "maxGuests": 0,
         "price": 0,
+        "rooms": [],
         "__v": 0
       },
       "checkIn": new Date(),

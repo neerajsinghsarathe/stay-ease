@@ -1,5 +1,13 @@
 <div class="mt-4 overflow-x-hidden px-8 pt-20 ">
-  <h1 class="text-3xl mb-2">{{ place.title }}</h1>
+
+  <div class="my-2 flex gap-3">
+    <div>
+      <h1 class="text-3xl mb-2">{{ place.title }}</h1>
+    </div>
+    <div class="text-sm leading-5 text-gray-700">
+      <p-tag [icon]="'pi pi-star'" [severity]="rating > 4 ? 'success' : 'warning'" [value]="place.rating" [className]="'inline-block'"></p-tag>
+    </div>
+  </div>
 
   <app-address-link [placeAddress]="place.address" [className]="'mb-3'"></app-address-link>
   <app-place-gallery [place]="place"></app-place-gallery>
@@ -10,19 +18,30 @@
         <h2 class="text-2xl font-semibold">Description</h2>
         {{ place.description }}
       </div>
-      Max number of guests: {{ place.maxGuests }}
+
+      <div class="my-4">
+        <h2 class="text-2xl font-semibold">Rooms</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          @for (room of place.rooms; track room.roomId) {
+            <div class="border p-4 rounded-lg">
+              <h3 class="text-xl font-semibold">{{ room.roomType }}</h3>
+              <p class="text-gray-700">{{ room.roomDescription }}</p>
+              <p class="text-gray-700">Price: {{ room.price | currency }}</p>
+              <p class="text-gray-700">Max guests: {{ room.capacity }}</p>
+            </div>
+          }
+        </div>
+      </div>
       <app-perks-widget [perks]="place.perks"></app-perks-widget>
     </div>
     <div>
       <app-booking-widget [place]="place"></app-booking-widget>
     </div>
   </div>
-  <div class="-mx-8 border-t bg-white px-8 py-8">
-    <div>
-      <h2 class="mt-4 text-2xl font-semibold">Extra Info</h2>
+  @if (place.reviews != undefined && place.reviews.length > 0) {
+    <div class="-mx-8 border-t bg-white px-8 py-8">
+      <h2 class="text-2xl font-semibold">Reviews</h2>
+      <app-reviews [reviews]="place.reviews"></app-reviews>
     </div>
-    <div class="mb-4 mt-2 text-sm leading-5 text-gray-700">
-      {{ place.extraInfo }}
-    </div>
-  </div>
+  }
 </div>

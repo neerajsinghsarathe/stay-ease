@@ -15,14 +15,15 @@ export class PlaceGalleryComponent {
     "title": "",
     "address": "",
     "perks": [],
-    "extraInfo": "",
+    "rating": "",
     "checkIn": 0,
     "checkOut": 0,
     "maxGuests": 0,
     "price": 0,
     "__v": 0,
     "description": "",
-    "photos": []
+    "photos": [],
+    "rooms": []
   };
   showAllPhotos: boolean = false;
 
