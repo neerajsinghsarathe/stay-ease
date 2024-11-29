@@ -48,6 +48,10 @@ export class ProfilePageComponent {
         }
       },
       error: (error: any) => {
+        if(error.status === 401) {
+          this.router.navigate(['/login']).then(() => localStorage.clear());
+          return;
+        }
         if (error === 'User not found') {
           this.router.navigate(['/login']);
           return;

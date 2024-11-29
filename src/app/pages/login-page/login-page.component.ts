@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ToastService} from '../../helpers/toast/toast.service';
 import {LoginPageService} from './login-page.service';
 
@@ -16,6 +16,7 @@ import {LoginPageService} from './login-page.service';
 })
 export class LoginPageComponent implements OnInit {
   pageTitle = 'Login';
+  role = 'user';
   loginFormData = {
     email: '',
     password: ''
@@ -30,11 +31,21 @@ export class LoginPageComponent implements OnInit {
     confirmPassword: ''
   }
 
-  constructor(private router: Router, private toastService: ToastService, private loginPageService: LoginPageService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastService: ToastService,
+    private loginPageService: LoginPageService) {
+
+    this.route.queryParams.subscribe(params => {
+      if (params['role'] === 'admin') {
+        this.role = 'admin';
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.pageTitle = this.router.url === '/login' ? 'Login' : 'Register';
+    this.pageTitle = this.router.url.includes('/login') ? 'Login' : 'Register';
   }
 
   handleFormSubmit(submissionType: string): void {
