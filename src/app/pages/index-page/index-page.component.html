@@ -1,10 +1,11 @@
+<app-spinner [isLoading]="isLoading"></app-spinner>
 <div class="grid grid-cols-1 justify-items-center pb-32 px-4 md:grid-cols-2 md:gap-0 lg:grid-cols-3 lg:gap-2 xl:grid-cols-4 xl:gap-10">
 
-  @if (places.length > 0) {
+  @if (places.length > 0 && !isLoading) {
     @for (place of places; track place._id) {
       <app-place-card [place]="place"></app-place-card>
     }
-  } @else {
+  } @else if (!isLoading) {
     <div class="absolute left-1/2 right-1/2 top-40 flex  w-full -translate-x-1/2 transform flex-col p-10  md:w-1/2">
       <h1 class="text-3xl font-semibold">Result not found!</h1>
       <p class="text-lg font-semibold">

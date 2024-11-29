@@ -2,7 +2,7 @@
 @if (showHeader) {
   <app-header></app-header>
 }
-<div class="mx-auto flex min-h-screen flex-col justify-center">
+<div class="mx-auto flex min-h-screen flex-col justify-center" [ngClass]="{'max-w-screen-xl' : !isLoginOrRegisterPage}">
   <router-outlet></router-outlet>
 </div>
 @if (showFooter) {

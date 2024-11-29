@@ -3,22 +3,26 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Place, PlaceModelList} from '../../models/place.model';
 import {PlaceCardComponent} from '../../helpers/place-card/place-card.component';
 import {IndexPageService} from './index-page.service';
+import {SpinnerComponent} from '../../helpers/spinner/spinner.component';
 
 @Component({
   selector: 'app-index-page',
   standalone: true,
   imports: [
     RouterLink,
-    PlaceCardComponent
+    PlaceCardComponent,
+    SpinnerComponent
   ],
   templateUrl: './index-page.component.html',
   styleUrl: './index-page.component.css'
 })
 export class IndexPageComponent implements OnInit {
   places: Place[] = [];
+  isLoading!: boolean;
   constructor(private indexPageService: IndexPageService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.route.queryParams.subscribe(params => {
       if (params['q']) {
         this.searchPlaces(params['q']);
@@ -36,6 +40,9 @@ export class IndexPageComponent implements OnInit {
       },
       error: (error: any) => {
         this.places = [];
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -48,6 +55,9 @@ export class IndexPageComponent implements OnInit {
       },
       error: (error: any) => {
         this.places = [];
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }

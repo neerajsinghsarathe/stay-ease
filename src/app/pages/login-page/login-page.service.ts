@@ -24,4 +24,17 @@ export class LoginPageService {
   register(registerFormData: any) {
     return this.httpService.post(`${this.domainUrl}/user`, registerFormData);
   }
+
+  adminLogin(loginFormData: { password: string; email: string }) {
+    return this.httpService.post(`${this.domainUrl}/Login/owner`, loginFormData).pipe(tap((response: any) => {
+      if (response.status) {
+        this.httpService.setToken(response.token['token1']);
+        this.httpService.setUser(JSON.stringify(response.data));
+      }
+    }));
+  }
+
+  registerAdmin(body: any) {
+    return this.httpService.post(`${this.domainUrl}/Owner`, body);
+  }
 }

@@ -1,2 +1,5 @@
-<div class="absolute inset-1/2 flex flex-col items-center justify-center">
-</div>
+@if (isLoading()) {
+  <div class="absolute inset-1/2 flex flex-col items-center justify-center">
+    <p-progressSpinner strokeWidth="2" class="w-20 h-20"></p-progressSpinner>
+  </div>
+}

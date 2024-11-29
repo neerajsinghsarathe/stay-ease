@@ -62,18 +62,33 @@ export class LoginPageComponent implements OnInit {
       return
     }
 
-    this.loginPageService.login(this.loginFormData).subscribe({
-      next: (response: any) => {
-        if (response.status) {
-          this.router.navigate(['/']);
-        } else {
+    if(this.role === 'admin') {
+      this.loginPageService.adminLogin(this.loginFormData).subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.toastService.showError('Invalid email or password');
+          }
+        },
+        error: (error: any) => {
           this.toastService.showError('Invalid email or password');
         }
-      },
-      error: (error: any) => {
-        this.toastService.showError('Invalid email or password');
-      }
-    });
+      });
+    } else {
+      this.loginPageService.login(this.loginFormData).subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.router.navigate(['/']);
+          } else {
+            this.toastService.showError('Invalid email or password');
+          }
+        },
+        error: (error: any) => {
+          this.toastService.showError('Invalid email or password');
+        }
+      });
+    }
   }
 
   register(): void {
@@ -94,33 +109,52 @@ export class LoginPageComponent implements OnInit {
       return
     }
 
-    const body = {
-      "userId": 0,
+    let body: any = {
       "userName": this.registerFormData.userName,
       "firstName": this.registerFormData.firstName,
       "lastName": this.registerFormData.lastName,
-      "userPassword": this.registerFormData.password,
       "email": this.registerFormData.email,
       "phoneNumber": "",
       "dob": this.registerFormData.dateOfBirth,
       "isActive": true
-
     };
 
-    this.loginPageService.register(body).subscribe({
-      next: (response: any) => {
-        if (!response.status) {
-          this.toastService.showError('Registration failed');
-          return;
-        }
+    const idKey = this.role === 'admin' ? 'ownerId' : 'userId';
+    const passwordKey = this.role === 'admin' ? 'ownerPassword' : 'userPassword';
+    body = {...body, [idKey]: 0, [passwordKey]: this.registerFormData.password};
 
-        this.loginFormData.email = this.registerFormData.email;
-        this.loginFormData.password = this.registerFormData.password;
-        this.login();
-      },
-      error: (error: any) => {
-        this.toastService.showError(error.error.data);
-      }
-    });
+    if (this.role === 'admin') {
+      this.loginPageService.registerAdmin(body).subscribe({
+        next: (response: any) => {
+          if (!response.status) {
+            this.toastService.showError('Registration failed');
+            return;
+          }
+
+          this.loginFormData.email = this.registerFormData.email;
+          this.loginFormData.password = this.registerFormData.password;
+          this.login();
+        },
+        error: (error: any) => {
+          this.toastService.showError(error.error.data);
+        }
+      });
+    } else {
+      this.loginPageService.register(body).subscribe({
+        next: (response: any) => {
+          if (!response.status) {
+            this.toastService.showError('Registration failed');
+            return;
+          }
+
+          this.loginFormData.email = this.registerFormData.email;
+          this.loginFormData.password = this.registerFormData.password;
+          this.login();
+        },
+        error: (error: any) => {
+          this.toastService.showError(error.error.data);
+        }
+      });
+    }
   }
 }
