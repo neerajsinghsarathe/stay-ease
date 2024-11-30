@@ -85,9 +85,9 @@
 
     <p class="py-2 text-center text-gray-500">
       @if (pageTitle === 'Login') {
-        Don't have an account? <a routerLink="/register" class="underline">Register</a>
+        Don't have an account? <a (click)="goToPage('register')" class="underline">Register</a>
       } @else {
-        Already have an account? <a routerLink="/login" class="underline">Login</a>
+        Already have an account? <a (click)="goToPage('login')" class="underline">Login</a>
       }
     </p>
 

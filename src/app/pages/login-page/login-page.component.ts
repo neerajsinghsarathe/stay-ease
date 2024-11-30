@@ -123,4 +123,12 @@ export class LoginPageComponent implements OnInit {
       }
     });
   }
+
+  goToPage(page: string) {
+    if (this.role === 'admin') {
+      this.router.navigate([`/${page}`], {queryParams: {role: 'admin'}});
+    } else {
+      this.router.navigate([`/${page}`]);
+    }
+  }
 }
