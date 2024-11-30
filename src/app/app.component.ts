@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
-       this.isLoginOrRegisterPage = event.url?.includes('/login') || event.url === '/register';
+       this.isLoginOrRegisterPage = event.url?.includes('/login') || event.url?.includes('/register');
       this.showHeader = !this.isLoginOrRegisterPage;
       this.showFooter = !this.isLoginOrRegisterPage;
     });
