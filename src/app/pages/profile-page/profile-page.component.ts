@@ -43,17 +43,17 @@ export class ProfilePageComponent {
       next: (response: any) => {
         this.user = new UserModel(response.data);
         if (this.user.id === 0) {
-          this.router.navigate(['/login']);
+          this.goToLoginPage();
           throw new Error('User not found');
         }
       },
       error: (error: any) => {
         if(error.status === 401) {
-          this.router.navigate(['/login']).then(() => localStorage.clear());
+          this.goToLoginPage();
           return;
         }
         if (error === 'User not found') {
-          this.router.navigate(['/login']);
+          this.goToLoginPage();
           return;
         }
         this.toastService.showError(error.error.data);
@@ -62,7 +62,7 @@ export class ProfilePageComponent {
   }
 
   handleLogout() {
-    this.router.navigate(['/login']).then(r => localStorage.clear());
+    this.goToLoginPage();
   }
 
   showHideEditPageDialog() {
@@ -101,8 +101,7 @@ export class ProfilePageComponent {
       "email": this.formData.email,
       "phoneNumber": "",
       "dob": this.user.dob,
-      "isActive": this.user.isActive,
-
+      "isActive": this.user.isActive
     }
 
     this.accountService.updateUserDetails(body).subscribe({
@@ -113,11 +112,15 @@ export class ProfilePageComponent {
       },
       error: (error: any) => {
         if (error.status === 401) {
-          this.router.navigate(['/login']).then(() => localStorage.clear());
+          this.goToLoginPage();
           return;
         }
         this.toastService.showError(error);
       }
     });
+  }
+
+  goToLoginPage() {
+    this.router.navigate(['/login']).then(() => localStorage.clear());
   }
 }

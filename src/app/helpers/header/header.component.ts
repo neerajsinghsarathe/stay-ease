@@ -23,12 +23,13 @@ export class HeaderComponent implements OnInit{
   constructor(private router: Router, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.showSearchBar = !(this.router.url.includes('/account') || this.router.url.includes('/dashboard'));
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
-        this.showSearchBar = !event.url.includes('/account');
+        this.showSearchBar = !(event.url.includes('/account'));
         this.hasShadow = !event.url.includes('/account');
-        this.cdRef.detectChanges();
       }
+      this.cdRef.detectChanges();
     });
   }
 }

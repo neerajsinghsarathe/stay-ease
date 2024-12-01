@@ -7,6 +7,7 @@ import {ProfilePageComponent} from './pages/profile-page/profile-page.component'
 import {AccountPageComponent} from './pages/account-page/account-page.component';
 import {BookingsPageComponent} from './pages/bookings-page/bookings-page.component';
 import {PlacesPageComponent} from './pages/places-page/places-page.component';
+import {OwnerDashboardComponent} from './pages/owner-dashboard/owner-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
       component: ProfilePageComponent
       },
       {
+        path: 'owner',
+        component: ProfilePageComponent
+      },
+      {
         path: 'bookings',
         component: BookingsPageComponent
       },
@@ -50,6 +55,10 @@ export const routes: Routes = [
         component: PlacesPageComponent
       }
     ]
+  },
+  {
+    path: 'dashboard',
+    component: OwnerDashboardComponent
   },
   {
     path: '**',

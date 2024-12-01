@@ -10,7 +10,6 @@ import {LoaderComponent} from '../../helpers/loader/loader.component';
   standalone: true,
   imports: [
     FormsModule,
-    RouterLink,
     LoaderComponent
   ],
   templateUrl: './login-page.component.html',
@@ -73,6 +72,7 @@ export class LoginPageComponent implements OnInit {
     this.loginPageService[loginMethod](this.loginFormData).subscribe({
       next: (response: any) => {
         if (response.status) {
+          localStorage.setItem('role', this.role || 'user');
           this.router.navigate([navigateTo]);
         } else {
           this.toastService.showError('Invalid email or password');

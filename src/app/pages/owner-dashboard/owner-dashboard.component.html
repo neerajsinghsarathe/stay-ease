@@ -1,0 +1,51 @@
+<div class="min-h-dvh pt-24 border-gray-500">
+  <!-- Add three cards for total hotels, total bookings and total revenue -->
+  <div class="grid grid-cols-1 gap-4 px-4 sm:grid-cols-3">
+    @for(item of ownerData; track item.name) {
+      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold text-gray-600">{{ item.name }}</p>
+            <p class="text-2xl font-semibold text-gray-800">
+              @if(item?.currency){$}{{ item.count }}
+            </p>
+          </div>
+          <div class="p-2 bg-gray-200 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 10a2 2 0 114 0 2 2 0 01-4 0z"
+                    clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <!-- Add table to show recent bookings -->
+  <div class="px-4 mt-4">
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Booking ID</th>
+            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Hotel Name</th>
+            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Check-in</th>
+            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Check-out</th>
+            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(booking of ownerData.bookings; track booking.id) {
+            <tr>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.id }}</td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.hotelName }}</td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkIn }}</td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkOut }}</td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.status }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

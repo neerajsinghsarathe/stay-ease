@@ -18,6 +18,7 @@ export interface UserAPIModel {
   created_at: string;
   profileImg: string;
   userId : number;
+  ownerId : number;
   userPassword : string;
   userName: string;
   firstName: string;
@@ -43,7 +44,7 @@ export class UserModel implements User {
   isActive?: boolean;
 
   constructor(user: UserAPIModel) {
-    this.id = user.userId || 0;
+    this.id = user.userId ?? user.ownerId ?? 0;
     this.userName = user.userName;
     this.firstName = user.firstName;
     this.lastName = user.lastName;

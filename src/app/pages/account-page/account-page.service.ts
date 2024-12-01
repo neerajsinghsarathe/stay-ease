@@ -8,18 +8,24 @@ import {Observable, observeOn} from 'rxjs';
 export class AccountPageService {
   private readonly domainUrl: string;
   private readonly userId: string;
+  private readonly ownerId: string;
 
   constructor(private httpService: HttpService) {
     this.domainUrl = this.httpService.getDomainUrl();
     const user = this.httpService.getUser();
-    this.userId = user ? JSON.parse(user).userId : '';
+    this.userId = user ? JSON.parse(user).userId: '';
+    this.ownerId = user ? JSON.parse(user).ownerId: '';
   }
 
   getUserDetails() {
-    if (!this.userId) {
+    if (!this.userId && !this.ownerId) {
       return new Observable(observeOn => observeOn.error('User not found'));
     }
-    return this.httpService.get(`${this.domainUrl}/User/${this.userId}`, true);
+    if (this.userId) {
+      return this.httpService.get(`${this.domainUrl}/User/${this.userId}`, true);
+    } else {
+      return this.httpService.get(`${this.domainUrl}/Owner/${this.ownerId}`, true);
+    }
   }
 
   updateUserDetails(data: any) {
