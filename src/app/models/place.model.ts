@@ -81,7 +81,7 @@ export class PlaceModel implements Place {
     this.maxGuests = 10;
     this.price = place.price || 0;
     this.description = place.description || "";
-    this.photos = place.images || [];
+    this.photos = place.images?.length > 0 ? place.images : [];
     this.rooms = place.rooms || [];
     this.reviews = place.reviews || [];
     this.__v = 0;

@@ -6,7 +6,6 @@ import {PlaceImgComponent} from '../place-img/place-img.component';
   selector: 'app-info-card',
   standalone: true,
   imports: [
-    RouterLink,
     PlaceImgComponent
   ],
   templateUrl: './info-card.component.html',

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {InfoCardComponent} from '../../helpers/info-card/info-card.component';
-import {Place} from '../../models/place.model';
+import {Place, PlaceModelList} from '../../models/place.model';
 import {DialogModule} from 'primeng/dialog';
 import {PlacesFormPageComponent} from '../places-form-page/places-form-page.component';
 import {FormsModule} from '@angular/forms';
+import {AccountPageService} from '../account-page/account-page.service';
 
 @Component({
   selector: 'app-places-page',
@@ -33,32 +34,13 @@ export class PlacesPageComponent {
     "rooms": [],
     "__v": 0
   };
-  places: Place[] = [
-    {
-      "_id": 1,
-      "owner": "6714cba9d5f656cfe6ceda40",
-      "title": "abcd",
-      "address": "USA",
-      "photos": [
-        "https://res.cloudinary.com/rahul4019/image/upload/v1731352844/Airbnb/Places/njrd1mdvdobenzk89mts.jpg",
-        "https://res.cloudinary.com/rahul4019/image/upload/v1731352850/Airbnb/Places/prdkev3lkwgey7liueqt.jpg",
-        "https://res.cloudinary.com/rahul4019/image/upload/v1731352855/Airbnb/Places/vmhmk629yy4lrziagz6k.jpg",
-        "https://res.cloudinary.com/rahul4019/image/upload/v1731352891/Airbnb/Places/uxyoryjndfeteauuseo3.jpg",
-        "https://res.cloudinary.com/rahul4019/image/upload/v1731352898/Airbnb/Places/e7lglpj1kbhwrpuayxrd.jpg"
-      ],
-      "description": "qwerty",
-      "perks": [
-        "tv",
-        "wifi",
-        "enterence"
-      ],
-      "rating": "no rules",
-      "maxGuests": 10,
-      "price": 500,
-      "rooms": [],
-      "__v": 0
-    }
-  ];
+  places: Place[] = [];
+
+  constructor(private accountService: AccountPageService) {
+    this.accountService.getAccommodations().subscribe((response: any) => {
+      this.places = new PlaceModelList(response.data).places;
+    });
+  }
 
   onPlaceFormModal(place?: Place): void {
     this.displayModal = true;

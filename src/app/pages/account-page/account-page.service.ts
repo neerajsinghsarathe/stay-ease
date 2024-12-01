@@ -44,4 +44,8 @@ export class AccountPageService {
   updateBookingStatus(bookingId: string | number, bookingData: any) {
     return this.httpService.put(`${this.domainUrl}/owner/updatebooking/${this.userId ?? this.ownerId}/${bookingId}`, bookingData, true);
   }
+
+  getAccommodations() {
+    return this.httpService.get(`${this.domainUrl}/Owner/Hotels/${this.ownerId}`, true);
+  }
 }
