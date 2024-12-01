@@ -1,56 +1,46 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, NgIterable, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {NgForOf} from '@angular/common';
+import {File} from 'node:buffer';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-photos-uploader',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    FormsModule
+  ],
   templateUrl: './photos-uploader.component.html',
   styleUrl: './photos-uploader.component.css'
 })
 export class PhotosUploaderComponent implements OnInit{
 
-  @Input() addedPhotos: string[] = [];
+  @Input() addedPhotos: any = [];
   @Output() photosChange: EventEmitter<string[]> = new EventEmitter<string[]>();
+  photos: any[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.photos = this.addedPhotos;
   }
 
-  /*onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      if (this.files.length < this.maxFiles) {
-        this.uploadFile(file);
-      }
-    }
+  removePhoto(i: number) {
+    this.photos.splice(i, 1);
+    this.photosChange.emit(this.addedPhotos);
   }
 
-  uploadFile(file: File): void {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    // Call your API endpoint to upload the file
-    this.http.post<{ url: string }>('YOUR_API_URL', formData).subscribe({
-      next: (response) => {
-        this.files.push(file);
-        this.uploadedUrls.push(response.url);
-        this.filesUploaded.emit(this.uploadedUrls);
-      },
-      error: (err) => {
-        console.error('File upload failed:', err);
-      },
+  onFileChange($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.photos.push({ imageUrl : e.target?.result, file: file});
+      };
+      reader.readAsDataURL(file);
     });
   }
-
-  removeFile(index: number): void {
-    this.files.splice(index, 1);
-    this.uploadedUrls.splice(index, 1);
-    this.filesUploaded.emit(this.uploadedUrls);
-  }*/
-
 }

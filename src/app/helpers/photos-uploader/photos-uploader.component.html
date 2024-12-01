@@ -1,17 +1,64 @@
 <div class="col-span-full">
-  <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-    <div class="text-center">
-      <svg class="mx-auto size-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon">
-        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+  <div class="mt-2 flex flex-col justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+    <!-- Able to add multiple files and show those images below -->
+    <input
+      type="file"
+      multiple
+      (change)="onFileChange($event)"
+      accept="image/*"
+      class="hidden"
+      id="file"
+    />
+    <label for="file" class="flex items-center justify-center gap-2 cursor-pointer">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-6 w-6"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
       </svg>
-      <div class="mt-4 flex text-sm/6 text-gray-600">
-        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-          <span>Upload a file</span>
-<!--          <input id="file-upload" name="file-upload" type="file" class="sr-only" (change)="onFileSelected($event)" >-->
-        </label>
-        <p class="pl-1">or drag and drop</p>
+      <span class="text-gray-500">Add photos</span>
+    </label>
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <div
+        *ngFor="let photo of photos; let i = index"
+        class="relative flex items-center justify-center bg-gray-900/25 rounded-lg"
+      >
+        <img
+          [src]="photo?.imageUrl"
+          alt="photo"
+          class="w-full h-full object-cover rounded-lg"
+        />
+        <button
+          (click)="removePhoto(i)"
+          class="absolute top-2 right-2 p-1 rounded-full bg-gray-900/50"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <p class="text-xs/5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
     </div>
   </div>
 </div>

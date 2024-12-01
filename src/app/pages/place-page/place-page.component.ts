@@ -34,7 +34,7 @@ export class PlacePageComponent implements OnInit{
     "_id": 0,
     "owner": "",
     "title": "",
-    "address": "",
+    "fullAddress": "",
     "perks": [],
     "rating": "",
     "checkIn": 0,

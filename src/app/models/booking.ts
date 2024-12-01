@@ -43,7 +43,7 @@ export class BookingModel implements Booking {
       _id: booking.hotelId,
       owner: '',
       title: booking.hotelName,
-      address: '',
+      fullAddress: '',
       photos: [booking.hotelImage],
       description: '',
       perks: [],

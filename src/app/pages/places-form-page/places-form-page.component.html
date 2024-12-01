@@ -2,28 +2,41 @@
   <div class="p-4">
     <form [formGroup]="formData" (ngSubmit)="savePlace()">
       <div>
-        <h2 class="mt-4 text-2xl">Title</h2>
+        <h2 class="mt-4 text-2xl">Title <sup class="text-red-600 text-sm">*</sup></h2>
         <p class="text-sm text-gray-500">title for your place. Should be short and catchy as in advertisement</p>
         <input type="text" formControlName="title" placeholder="title, for example: My lovely apt"/>
       </div>
 
       <div>
-        <h2 class="mt-4 text-2xl">Address</h2>
-        <p class="text-sm text-gray-500">address to this place</p>
-        <input type="text" formControlName="address" placeholder="address"/>
-      </div>
-
-      <div>
-        <h2 class="mt-4 text-2xl">Photos</h2>
-        <p class="text-sm text-gray-500">more = better</p>
-        <!--TODO: Add Photo Uploader for the places-->
-        <!--app-photos-uploader [addedPhotos]="addedPhotos" (photosChange)="addedPhotos = $event"></app-photos-uploader>-->
-      </div>
-
-      <div>
-        <h2 class="mt-4 text-2xl">Description</h2>
+        <h2 class="mt-4 text-2xl">Description <sup class="text-red-600 text-sm">*</sup></h2>
         <p class="text-sm text-gray-500">description of the place</p>
         <textarea formControlName="description"></textarea>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-2xl">Location</h2>
+        <div class="mt-2 grid grid-flow-row grid-cols-2 gap-x-4">
+          <div>
+            <label class="text-sm" >Address <sup class="text-red-600">*</sup></label>
+            <input type="text" formControlName="address" placeholder="address"/>
+          </div>
+          <div>
+            <label class="text-sm" >City <sup class="text-red-600">*</sup></label>
+            <input type="text" formControlName="city" placeholder="city"/>
+          </div>
+          <div>
+            <label class="text-sm" >State <sup class="text-red-600">*</sup></label>
+            <input type="text" formControlName="state" placeholder="state"/>
+          </div>
+          <div>
+            <label class="text-sm" >Pincode <sup class="text-red-600">*</sup></label>
+            <input type="number" formControlName="pinCode" placeholder="pincode"/>
+          </div>
+          <div>
+            <label class="text-sm" >Country <sup class="text-red-600">*</sup></label>
+            <input type="text" formControlName="country" placeholder="country"/>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -33,28 +46,39 @@
       </div>
 
       <div>
-        <h2 class="mt-4 text-2xl">Extra info</h2>
-        <p class="text-sm text-gray-500">house rules, etc</p>
-        <textarea formControlName="extraInfo"></textarea>
-      </div>
-
-      <div>
-        <h2 class="mt-4 text-2xl">Number of guests & Price</h2>
-        <p class="text-sm text-gray-500">Specify the maximum number of guests so that the client stays within the
-          limit.</p>
-        <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
+        <h2 class="mt-4 text-2xl">Price and other information</h2>
+        <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
           <div>
-            <h3 class="mt-2 -mb-1">Max no. of guests</h3>
-            <input type="number" formControlName="maxGuests" placeholder="1"/>
+            <h3 class="mt-2 mb-1 ml-1">Price per night <sup class="text-red-600 text-sm">*</sup></h3>
+            <input type="number" formControlName="price" placeholder="1"/>
           </div>
           <div>
-            <h3 class="mt-2 -mb-1">Price per night</h3>
-            <input type="number" formControlName="price" placeholder="1"/>
+            <h3 class="mt-2 mb-1 ml-1">Rating</h3>
+            <input type="number" formControlName="rating" placeholder="1"/>
+          </div>
+          <div>
+            <h3 class="mt-2 mb-1 ml-1">Active Status</h3>
+            <select formControlName="isActive">
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <button class="mx-auto my-4 flex rounded-full bg-primary py-3 px-20 text-xl font-semibold text-white">
+      <div>
+        <h2 class="mt-4 text-2xl">Photos <sup class="text-red-600 text-sm">*</sup></h2>
+        <p class="text-xs text-gray-500">Atleast 5 (more = better)</p>
+        <app-photos-uploader [addedPhotos]="addedPhotos" (photosChange)="addedPhotos = $event"></app-photos-uploader>
+      </div>
+
+      <!--<div>
+        <h2 class="mt-4 text-2xl">Rooms</h2>
+        <p class="text-sm text-gray-500">add rooms to your place</p>
+        <app-rooms [rooms]="formData.get('rooms')?.value" (roomsChange)="formData.get('rooms')?.setValue($event)"></app-rooms>
+      </div>-->
+
+      <button type="submit" class="mx-auto my-4 flex rounded-full bg-primary py-3 px-20 text-xl font-semibold text-white">
         Save
       </button>
     </form>

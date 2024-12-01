@@ -17,6 +17,10 @@ export class AccountPageService {
     this.ownerId = user ? JSON.parse(user).ownerId: '';
   }
 
+  getOwnerId() {
+    return this.ownerId;
+  }
+
   getUserDetails() {
     if (this.userId) {
       return this.httpService.get(`${this.domainUrl}/User/${this.userId}`, true);

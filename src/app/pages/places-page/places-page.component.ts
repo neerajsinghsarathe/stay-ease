@@ -24,7 +24,7 @@ export class PlacesPageComponent {
     "_id": 0,
     "owner": "",
     "title": "",
-    "address": "",
+    "fullAddress": "",
     "photos": [],
     "description": "",
     "perks": [],

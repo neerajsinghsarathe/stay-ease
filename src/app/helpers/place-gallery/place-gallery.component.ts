@@ -13,7 +13,7 @@ export class PlaceGalleryComponent {
     "_id": 0,
     "owner": "",
     "title": "",
-    "address": "",
+    "fullAddress": "",
     "perks": [],
     "rating": "",
     "checkIn": 0,

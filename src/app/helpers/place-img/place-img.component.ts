@@ -7,7 +7,7 @@ import {JsonPipe, NgClass, NgIf} from '@angular/common';
   imports: [
     NgClass
   ],
-  template: `@if (place.photos?.length) {
+  template: `@if (place.photos.length) {
     <img [src]="place.photos[index]?.imageUrl" alt="" [ngClass]="className || 'object-cover'" />
     }`,
   styleUrl: './place-img.component.css'
