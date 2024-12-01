@@ -21,13 +21,11 @@
       </div>
     }
   </div>
-  <!-- Add table to show recent bookings -->
   <div class="px-4 mt-4">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
         <thead>
           <tr>
-            <th class="px-4 py-2 text-sm font-semibold text-gray-600">Booking ID</th>
             <th class="px-4 py-2 text-sm font-semibold text-gray-600">Hotel Name</th>
             <th class="px-4 py-2 text-sm font-semibold text-gray-600">Check-in</th>
             <th class="px-4 py-2 text-sm font-semibold text-gray-600">Check-out</th>
@@ -35,13 +33,24 @@
           </tr>
         </thead>
         <tbody>
-          @for(booking of ownerData.bookings; track booking.id) {
+          @if (bookingsList.length > 0) {
+            @for(booking of bookingsList; track booking._id) {
+              <tr class="text-center">
+                <td class="px-4 py-2 text-sm text-gray-800">{{ booking.place.title }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkIn }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkOut }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">
+                  <select [(ngModel)]="booking.status" (change)="onUpdateBooking(booking)">
+                    @for(status of bookingStatus; track status) {
+                      <option [value]="status">{{ status }}</option>
+                    }
+                  </select>
+                </td>
+              </tr>
+            }
+          } @else {
             <tr>
-              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.id }}</td>
-              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.hotelName }}</td>
-              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkIn }}</td>
-              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.checkOut }}</td>
-              <td class="px-4 py-2 text-sm text-gray-800">{{ booking.status }}</td>
+              <td class="px-4 py-2 text-center text-sm text-gray-800" colspan="5">No bookings found</td>
             </tr>
           }
         </tbody>

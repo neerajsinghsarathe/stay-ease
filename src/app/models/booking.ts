@@ -9,6 +9,7 @@ export interface Booking {
   name: string;
   phone: string;
   price: number;
+  status?: string;
   __v: number;
 }
 
