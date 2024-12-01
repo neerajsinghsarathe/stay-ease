@@ -30,8 +30,8 @@
   </div>
 </div>
 
-@if (selectedPlace?._id && displayModal) {
-  <p-dialog header="Edit place" modal="true" [(visible)]="displayModal" draggable="false" [style]="{ width: '80vw' }">
+@if (displayModal) {
+  <p-dialog header="Edit place" modal="true" [(visible)]="displayModal" (close)="displayModal = false" draggable="false" [style]="{ width: '80vw' }">
     <app-places-form-page [place]="selectedPlace"></app-places-form-page>
   </p-dialog>
 }

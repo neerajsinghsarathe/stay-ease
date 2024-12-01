@@ -13,6 +13,7 @@ export interface Place {
   photos: string[];
   rooms: Room[]
   reviews?: Review[];
+  isActive?: boolean;
   __v?: number;
 }
 
@@ -69,6 +70,7 @@ export class PlaceModel implements Place {
   photos: string[];
   rooms: Room[];
   reviews?: Review[];
+  isActive?: boolean;
   __v?: number;
 
   constructor(place: PlaceAPIModel) {
@@ -84,6 +86,7 @@ export class PlaceModel implements Place {
     this.photos = place.images?.length > 0 ? place.images : [];
     this.rooms = place.rooms || [];
     this.reviews = place.reviews || [];
+    this.isActive = place.isActive.toString() === 'true' ? true : false;
     this.__v = 0;
   }
 }

@@ -32,6 +32,7 @@ export class PlacesPageComponent {
     "maxGuests": 0,
     "price": 0,
     "rooms": [],
+    "isActive": false,
     "__v": 0
   };
   places: Place[] = [];

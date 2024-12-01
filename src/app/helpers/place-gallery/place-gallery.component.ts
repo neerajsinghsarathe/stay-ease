@@ -23,7 +23,8 @@ export class PlaceGalleryComponent {
     "__v": 0,
     "description": "",
     "photos": [],
-    "rooms": []
+    "rooms": [],
+    "isActive": false
   };
   showAllPhotos: boolean = false;
 

@@ -13,7 +13,7 @@ import {JsonPipe, NgClass, NgIf} from '@angular/common';
   styleUrl: './place-img.component.css'
 })
 export class PlaceImgComponent {
-  @Input() place!: { _id: number; title: string; description: string, photos: any[] };
+  @Input() place!: { _id: number; title: string; description: string, photos: any[], isActive?: boolean };
   @Input() index: number = 0;
   @Input() className: string | null = null;
 
