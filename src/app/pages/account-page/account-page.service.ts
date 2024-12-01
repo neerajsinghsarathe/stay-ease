@@ -7,8 +7,8 @@ import {Observable, observeOn} from 'rxjs';
 })
 export class AccountPageService {
   private readonly domainUrl: string;
-  private readonly userId: string;
-  private readonly ownerId: string;
+  public readonly userId: string;
+  public readonly ownerId: string;
 
   constructor(private httpService: HttpService) {
     this.domainUrl = this.httpService.getDomainUrl();
@@ -18,9 +18,6 @@ export class AccountPageService {
   }
 
   getUserDetails() {
-    if (!this.userId && !this.ownerId) {
-      return new Observable(observeOn => observeOn.error('User not found'));
-    }
     if (this.userId) {
       return this.httpService.get(`${this.domainUrl}/User/${this.userId}`, true);
     } else {
@@ -29,7 +26,11 @@ export class AccountPageService {
   }
 
   updateUserDetails(data: any) {
-    return this.httpService.put(`${this.domainUrl}/User/${this.userId}`, data, true);
+    if(this.userId) {
+      return this.httpService.put(`${this.domainUrl}/User/${this.userId}`, data, true);
+    } else {
+      return this.httpService.put(`${this.domainUrl}/Owner/${this.ownerId}`, data, true);
+    }
   }
 
   bookPlace(data: any) {

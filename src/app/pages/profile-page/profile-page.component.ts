@@ -84,6 +84,7 @@ export class ProfilePageComponent {
 
   handleEditProfile() {
     if (this.user.id === 0) {
+      console.log('User not found');
       this.toastService.showError('User not found');
       return;
     }
@@ -92,9 +93,7 @@ export class ProfilePageComponent {
       return;
     }
 
-    const body = {
-      "userId": this.user.id,
-      "userPassword": this.formData.password || this.user.password,
+    let body: any = {
       "userName": this.formData.userName,
       "firstName": this.formData.firstName,
       "lastName": this.formData.lastName,
@@ -103,11 +102,21 @@ export class ProfilePageComponent {
       "dob": this.user.dob,
       "isActive": this.user.isActive
     }
+    body = {
+      ...body,
+      [this.accountService.userId ? 'userId' : 'ownerId']: this.user.id,
+      [this.accountService.userId ? 'userPassword' : 'ownerPassword']: this.formData.password || this.user.password
+    };
 
     this.accountService.updateUserDetails(body).subscribe({
       next: (response: any) => {
         this.toastService.showSuccess('Profile updated successfully');
-        this.user = new UserModel(response.data);
+        if (response.data.userId) {
+          this.user = new UserModel(response.data);
+        } else {
+          this.user = new UserModel(response.data[0]);
+        }
+
         this.showHideEditPageDialog();
       },
       error: (error: any) => {

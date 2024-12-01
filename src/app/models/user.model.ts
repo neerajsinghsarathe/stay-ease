@@ -20,6 +20,7 @@ export interface UserAPIModel {
   userId : number;
   ownerId : number;
   userPassword : string;
+  ownerPassword : string;
   userName: string;
   firstName: string;
   lastName: string;
@@ -49,7 +50,7 @@ export class UserModel implements User {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email || "";
-    this.password = user.userPassword || "";
+    this.password = user.userPassword ?? user.ownerPassword ?? "";
     this.profileImg = user.profileImg || "";
     this.created_at = user.created_at || "";
     this.updated_at = user.updated_at || "";
