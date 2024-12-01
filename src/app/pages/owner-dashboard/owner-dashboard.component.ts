@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Booking} from '../../models/booking';
 import {FormsModule} from '@angular/forms';
 import {AccountPageService} from '../account-page/account-page.service';
+import {ToastService} from '../../helpers/toast/toast.service';
 
 @Component({
   selector: 'app-owner-dashboard',
@@ -23,7 +24,7 @@ export class OwnerDashboardComponent {
   bookingsList: Booking[] = [];
   bookingStatus = ['Pending', 'Confirmed', 'Cancelled', 'Completed'];
 
-  constructor(private indexPageService: IndexPageService, private router: Router, private bookingService: AccountPageService) {
+  constructor(private indexPageService: IndexPageService, private router: Router, private bookingService: AccountPageService, private toastService: ToastService) {
     this.indexPageService.getOwnerData().subscribe({
       next: (response: any) => {
         this.ownerData = [
@@ -67,11 +68,11 @@ export class OwnerDashboardComponent {
 
   onUpdateBooking(booking: Booking) {
     this.bookingService.updateBookingStatus(booking._id, {status: booking.status}).subscribe({
-      next: (response: any) => {
-        console.log(response);
+      next: () => {
+        this.toastService.showSuccess('Booking updated successfully');
       },
-      error: (error: any) => {
-        console.log(error);
+      error: () => {
+        this.toastService.showError('Error updating booking');
       }
     });
   }
