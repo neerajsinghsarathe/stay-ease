@@ -89,6 +89,12 @@
         </div>
       </div>
       <app-place-gallery [place]="selectedPlace.place"></app-place-gallery>
+      @if (selectedPlace.place.reviews != undefined && selectedPlace.place.reviews.length > 0) {
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold">Reviews</h2>
+          <app-reviews [reviews]="selectedPlace.place.reviews"></app-reviews>
+        </div>
+      }
     </div>
     <p-footer></p-footer>
   </p-dialog>

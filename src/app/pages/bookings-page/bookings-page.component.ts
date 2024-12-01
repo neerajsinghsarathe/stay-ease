@@ -10,6 +10,7 @@ import {AccountPageService} from '../account-page/account-page.service';
 import {ToastService} from '../../helpers/toast/toast.service';
 import {IndexPageService} from '../index-page/index-page.service';
 import {PlaceModel} from '../../models/place.model';
+import {ReviewsComponent} from '../../helpers/reviews/reviews.component';
 
 @Component({
   selector: 'app-bookings-page',
@@ -20,7 +21,8 @@ import {PlaceModel} from '../../models/place.model';
     DialogModule,
     FormsModule,
     AddressLinkComponent,
-    PlaceGalleryComponent
+    PlaceGalleryComponent,
+    ReviewsComponent
   ],
   templateUrl: './bookings-page.component.html',
   styleUrl: './bookings-page.component.css'
@@ -44,6 +46,7 @@ export class BookingsPageComponent {
       "maxGuests": 0,
       "price": 0,
       "rooms": [],
+      "reviews": [],
       "__v": 0
     },
     "checkIn": new Date(),
@@ -71,6 +74,11 @@ export class BookingsPageComponent {
       next: (response: any) => {
         this.selectedPlace = booking;
         this.selectedPlace.place = new PlaceModel(response.data);
+        this.indexPageService.getReviews(booking.place._id).subscribe({
+          next: (response: any) => {
+            this.selectedPlace.place.reviews = response.data;
+          }
+        });
       }
     });
   }
@@ -92,6 +100,7 @@ export class BookingsPageComponent {
         "maxGuests": 0,
         "price": 0,
         "rooms": [],
+        "reviews": [],
         "__v": 0
       },
       "checkIn": new Date(),
