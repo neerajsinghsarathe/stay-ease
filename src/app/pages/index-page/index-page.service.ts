@@ -12,6 +12,10 @@ export class IndexPageService {
     this.domainUrl = this.httpService.getDomainUrl();
   }
 
+  getLocations() {
+    return this.httpService.get(this.domainUrl + '/locations');
+  }
+
   getPlaces() {
     return this.httpService.get(this.domainUrl + '/Hotel');
   }
@@ -20,8 +24,12 @@ export class IndexPageService {
     return this.httpService.get(this.domainUrl + '/Hotel/' + id);
   }
 
-  searchPlaces(query: string) {
+  searchPlacesByName(query: string) {
     return this.httpService.get(this.domainUrl + '/Hotel/search/' + query);
+  }
+
+  searchPlaces(query: any) {
+    return this.httpService.get(this.domainUrl + `/search/${query.checkIn}/${query.checkOut}/${query.country}/${query.pincode}/${query.capacity}`);
   }
 
   getReviews(id: string | number) {

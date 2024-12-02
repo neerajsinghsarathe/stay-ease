@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import {IndexPageService} from '../../pages/index-page/index-page.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,12 +14,18 @@ import {Router} from '@angular/router';
 })
 export class SearchBarComponent {
   searchText: any;
+  checkInDate: any;
+  checkOutDate: any;
+  guestCount: any;
+  locations: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private indexPageService: IndexPageService) {
+    this.indexPageService.getLocations().subscribe((locations: any) => {
+      this.locations = locations.data;
+    });
   }
 
   handleSearch($event?: Event) {
-    // Add params in the url to search
-    this.router.navigate(['/search'], { queryParams: { q: this.searchText } });
+    this.router.navigate(['/search'], { queryParams: { q: this.searchText, cin: this.checkInDate, cout: this.checkOutDate, count: this.guestCount } });
   }
 }

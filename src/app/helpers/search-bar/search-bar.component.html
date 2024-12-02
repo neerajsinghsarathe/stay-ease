@@ -7,6 +7,37 @@
       [(ngModel)]="searchText"
     />
   </div>
+  <div class="border-r border-gray-400 h-8"></div>
+  <div class="grow">
+    <input
+      type="date"
+      placeholder="Check-in"
+      style="margin-top:0; border-radius:0;"
+      class="h-full w-full border-none py-2 px-4 text-sm focus:outline-none md:text-lg"
+      [(ngModel)]="checkInDate"
+    />
+  </div>
+  <div class="border-r border-gray-400 h-8"></div>
+  <div class="grow">
+    <input
+      type="date"
+      [min]="checkInDate"
+      placeholder="Check-out"
+      style="margin-top:0; border-radius:0;"
+      class="h-full w-full border-none py-2 px-4 text-sm focus:outline-none md:text-lg"
+      [(ngModel)]="checkOutDate"
+    />
+  </div>
+  <div class="border-r border-gray-400 h-8"></div>
+  <div class="grow">
+    <input
+      type="number"
+      placeholder="Number of Guests"
+      style="margin-top:0; border-radius:0;max-width: 180px"
+      class="h-full border-none py-2 px-4 text-sm focus:outline-none md:text-lg"
+      [(ngModel)]="guestCount"
+    />
+  </div>
   <div class="bg-blue flex cursor-pointer items-center bg-primary text-white">
     <button
       class="flex rounded-r-full bg-primary py-2 px-4 md:p-2"
