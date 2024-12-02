@@ -95,6 +95,26 @@
           <app-reviews [reviews]="selectedPlace.place.reviews"></app-reviews>
         </div>
       }
+      <div class="mt-8">
+        <p class="text-2xl font-semibold">Add Reviews <span><p-rating [cancel]="false" [(ngModel)]="reviewForm.Rating" ></p-rating></span></p>
+        <form action="" (submit)="postReview()">
+            <textarea
+              name="review"
+              id="review"
+              cols="30"
+              rows="10"
+              class="w-full p-2 border border-gray-300 rounded-lg"
+              placeholder="Add your review here..."
+              [(ngModel)]="reviewForm.Comment"
+            ></textarea>
+          <button
+            type="submit"
+            class="w-full mt-4 bg-primary text-white p-2 rounded-lg hover:bg-primary-dark"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
     <p-footer></p-footer>
   </p-dialog>

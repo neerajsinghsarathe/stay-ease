@@ -7,11 +7,10 @@ import {AddressLinkComponent} from '../../helpers/address-link/address-link.comp
 import {Booking, BookingModelList} from '../../models/booking';
 import {PlaceGalleryComponent} from '../../helpers/place-gallery/place-gallery.component';
 import {AccountPageService} from '../account-page/account-page.service';
-import {ToastService} from '../../helpers/toast/toast.service';
 import {IndexPageService} from '../index-page/index-page.service';
 import {PlaceModel} from '../../models/place.model';
+import {RatingModule} from 'primeng/rating';
 import {ReviewsComponent} from '../../helpers/reviews/reviews.component';
-
 @Component({
   selector: 'app-bookings-page',
   standalone: true,
@@ -22,6 +21,7 @@ import {ReviewsComponent} from '../../helpers/reviews/reviews.component';
     FormsModule,
     AddressLinkComponent,
     PlaceGalleryComponent,
+    RatingModule,
     ReviewsComponent
   ],
   templateUrl: './bookings-page.component.html',
@@ -56,11 +56,19 @@ export class BookingsPageComponent {
     "price": 0,
     "__v": 0
   };
+  reviewForm = {
+    Rating: 0,
+    Comment: ''
+  }
 
   constructor(
     private indexPageService: IndexPageService,
     private accountService: AccountPageService
   ) {
+    this.getBookings();
+  }
+
+  getBookings() {
     this.accountService.getBookings().subscribe({
       next: (response: any) => {
         this.bookings = new BookingModelList(response.data).bookings;
@@ -110,5 +118,22 @@ export class BookingsPageComponent {
       "price": 0,
       "__v": 0
     };
+  }
+
+  postReview() {
+    const data = {
+      ...this.reviewForm,
+      HotelID: this.selectedPlace.place._id
+    };
+    this.accountService.postReview(data).subscribe({
+      next: (response: any) => {
+        this.reviewForm = {
+          Rating: 0,
+          Comment: ''
+        };
+        this.resetSelectedBooking();
+        this.getBookings();
+      }
+    });
   }
 }

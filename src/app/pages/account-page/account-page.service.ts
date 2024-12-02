@@ -56,4 +56,9 @@ export class AccountPageService {
   checkAvailability(data: any) {
     return this.httpService.get(`${this.domainUrl}/Hotel/${data.hotelId}/Rooms/availability?checkInDate=${data.checkIn}&checkOutDate=${data.checkOut}&capacity=${data.capacity}`, true)
   }
+
+  postReview(data: any) {
+    data = {...data, UserID: this.userId, ReviewDate: new Date().toISOString()};
+    return this.httpService.post(`${this.domainUrl}/postreview`, data, true);
+  }
 }
