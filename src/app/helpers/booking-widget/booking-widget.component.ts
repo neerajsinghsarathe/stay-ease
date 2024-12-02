@@ -5,12 +5,15 @@ import {Place, Room} from '../../models/place.model';
 import {Router, RouterLink} from '@angular/router';
 import {AccountPageService} from '../../pages/account-page/account-page.service';
 import {ToastService} from '../toast/toast.service';
+import {formatDate} from '@angular/common';
+import {LoaderComponent} from '../loader/loader.component';
 
 @Component({
   selector: 'app-booking-widget',
   standalone: true,
   imports: [
     FormsModule,
+    LoaderComponent,
   ],
   templateUrl: './booking-widget.component.html',
   styleUrl: './booking-widget.component.css'
@@ -26,6 +29,8 @@ export class BookingWidgetComponent implements OnInit {
   };
   user!: User;
   numberOfNights: number = 0;
+  isRoomAvailable: any = true;
+  checkingAvailability: boolean = false;
 
 
   constructor(
@@ -105,5 +110,24 @@ export class BookingWidgetComponent implements OnInit {
   getRoomPrice() {
     const room = this.place.rooms.find(room => room.roomType === this.bookingData.roomType);
     this.place.price = room?.price ?? 0;
+  }
+
+  validateBooking() {
+    this.checkingAvailability = true;
+    if(this.numberOfNights < 1 || !this.bookingData.noOfGuests || !this.bookingData.roomType) return;
+    const data = {
+      hotelId: this.place._id,
+      checkIn: formatDate(this.dateRange.checkIn ?? "", 'dd-MM-yyyy', 'en'),
+      checkOut: formatDate(this.dateRange.checkOut ?? "", 'dd-MM-yyyy', 'en'),
+      capacity: this.bookingData.noOfGuests
+    };
+    this.accountService.checkAvailability(data).subscribe({
+      next: (res: any) => {
+        const rooms = res.data;
+        this.isRoomAvailable = rooms.some((room: any) => room.roomType === this.bookingData.roomType && room.isAvailable);
+        this.checkingAvailability = false;
+        console.log(this.isRoomAvailable);
+      }
+    });
   }
 }

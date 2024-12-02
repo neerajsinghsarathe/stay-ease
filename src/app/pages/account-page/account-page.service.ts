@@ -52,4 +52,8 @@ export class AccountPageService {
   getAccommodations() {
     return this.httpService.get(`${this.domainUrl}/Owner/Hotels/${this.ownerId}`, true);
   }
+
+  checkAvailability(data: any) {
+    return this.httpService.get(`${this.domainUrl}/Hotel/${data.hotelId}/Rooms/availability?checkInDate=${data.checkIn}&checkOutDate=${data.checkOut}&capacity=${data.capacity}`, true)
+  }
 }

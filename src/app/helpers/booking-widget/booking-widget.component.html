@@ -9,7 +9,7 @@
         <input
           type="date"
           name="checkIn"
-          (change)="calculateNumberOfNights()"
+          (change)="calculateNumberOfNights();validateBooking()"
           [(ngModel)]="dateRange.checkIn"
         />
       </div>
@@ -18,7 +18,7 @@
         <input
           type="date"
           name="checkOut"
-          (change)="calculateNumberOfNights()"
+          (change)="calculateNumberOfNights();validateBooking()"
           [(ngModel)]="dateRange.checkOut"
         />
       </div>
@@ -32,9 +32,10 @@
         min=1
         max="{{place.maxGuests}}"
         [(ngModel)]="bookingData.noOfGuests"
+        (ngModelChange)="validateBooking()"
       />
       <label>Room Type</label>
-      <select name="roomType" [(ngModel)]="bookingData.roomType" (change)="getRoomPrice()">
+      <select name="roomType" [(ngModel)]="bookingData.roomType" (change)="getRoomPrice();validateBooking()">
         @for (room of place.rooms; track room.roomId) {
           <option [value]="room.roomType">
             {{ room.roomType }}
@@ -57,8 +58,14 @@
       />
     </div>
   </div>
-  @if (numberOfNights < 1 || !bookingData.noOfGuests || !bookingData.name || !bookingData.phone) {
-    <button class="w-full mt-2 p-2 rounded-xl text-white" disabled>Book this place</button>
+  @if (numberOfNights < 1 || !bookingData.noOfGuests || !bookingData.name || !bookingData.phone || !isRoomAvailable) {
+    <button class="w-full mt-2 p-2 rounded-xl text-white flex justify-center gap-2" disabled>
+      @if (!checkingAvailability) {
+        Book this place
+      } @else {
+        <app-loader></app-loader>
+      }
+    </button>
   } @else {
     <button class="primary mt-4" (click)="bookPlace()">
       Book this place
@@ -66,5 +73,8 @@
         ₹{{ numberOfNights * place.price }}
       }
     </button>
+  }
+  @if (isRoomAvailable === false && !checkingAvailability) {
+    <div class="text-red-500 text-center mt-2">Room is not available for the selected dates</div>
   }
 </div>
