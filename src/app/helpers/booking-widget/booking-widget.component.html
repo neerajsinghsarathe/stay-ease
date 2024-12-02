@@ -18,6 +18,7 @@
         <input
           type="date"
           name="checkOut"
+          [min]="this.dateRange.checkIn"
           (change)="calculateNumberOfNights();validateBooking()"
           [(ngModel)]="dateRange.checkOut"
         />
