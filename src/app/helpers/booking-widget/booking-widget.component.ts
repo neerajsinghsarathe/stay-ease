@@ -113,8 +113,8 @@ export class BookingWidgetComponent implements OnInit {
   }
 
   validateBooking() {
-    this.checkingAvailability = true;
     if(this.numberOfNights < 1 || !this.bookingData.noOfGuests || !this.bookingData.roomType) return;
+    this.checkingAvailability = true;
     const data = {
       hotelId: this.place._id,
       checkIn: formatDate(this.dateRange.checkIn ?? "", 'dd-MM-yyyy', 'en'),
