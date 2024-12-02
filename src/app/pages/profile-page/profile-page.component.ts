@@ -84,7 +84,6 @@ export class ProfilePageComponent {
 
   handleEditProfile() {
     if (this.user.id === 0) {
-      console.log('User not found');
       this.toastService.showError('User not found');
       return;
     }

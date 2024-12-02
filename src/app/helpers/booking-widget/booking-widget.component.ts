@@ -126,7 +126,6 @@ export class BookingWidgetComponent implements OnInit {
         const rooms = res.data;
         this.isRoomAvailable = rooms.some((room: any) => room.roomType === this.bookingData.roomType && room.isAvailable);
         this.checkingAvailability = false;
-        console.log(this.isRoomAvailable);
       }
     });
   }
