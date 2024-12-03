@@ -1,0 +1,19 @@
+::ng-deep .p-dropdown {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+}
+
+::ng-deep .p-dropdown.p-focus{
+  box-shadow: none;
+  border: 2px solid black;
+}
+
+::ng-deep .p-dropdown > .p-dropdown-trigger{
+  display: none;
+}
+
+::ng-deep .p-dropdown > .p-element{
+  border: none;
+  margin: 0;
+}

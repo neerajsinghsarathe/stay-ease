@@ -32,6 +32,6 @@
 
 @if (displayModal) {
   <p-dialog header="Edit place" modal="true" [(visible)]="displayModal" (close)="displayModal = false" draggable="false" [style]="{ width: '80vw' }">
-    <app-places-form-page [place]="selectedPlace"></app-places-form-page>
+    <app-places-form-page [place]="selectedPlace" [countries]="countries" [states]="states" [cities]="cities" [zipCodes]="zipCodes"></app-places-form-page>
   </p-dialog>
 }

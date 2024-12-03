@@ -15,27 +15,56 @@
 
       <div>
         <h2 class="mt-4 text-2xl">Location</h2>
-        <div class="mt-2 grid grid-flow-row grid-cols-2 gap-x-4">
+        <div class="mt-2 grid grid-flow-row">
           <div>
             <label class="text-sm" >Address <sup class="text-red-600">*</sup></label>
-            <input type="text" formControlName="address" placeholder="address"/>
+            <input type="text" formControlName="address"/>
           </div>
+        </div>
+        <div class=" grid grid-flow-row grid-cols-2 gap-x-4">
           <div>
-            <label class="text-sm" >City <sup class="text-red-600">*</sup></label>
-            <input type="text" formControlName="city" placeholder="city"/>
+            <label class="text-sm" >Country <sup class="text-red-600">*</sup></label>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="countries"
+              formControlName="country"
+              placeholder="Select a Country"
+              [editable]="true"
+              (onChange)="this.onCountryChange($event)"
+              optionLabel="countryName" />
           </div>
           <div>
             <label class="text-sm" >State <sup class="text-red-600">*</sup></label>
-            <input type="text" formControlName="state" placeholder="state"/>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="states"
+              formControlName="state"
+              placeholder="Select a State"
+              [editable]="true"
+              (onChange)="this.onStateChange($event)"
+              optionLabel="stateName" />
+          </div>
+          <div>
+            <label class="text-sm" >City <sup class="text-red-600">*</sup></label>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="cities"
+              formControlName="city"
+              placeholder="Select a City"
+              [editable]="true"
+              optionLabel="cityName" />
           </div>
           <div>
             <label class="text-sm" >Pincode <sup class="text-red-600">*</sup></label>
-            <input type="number" formControlName="pinCode" placeholder="pincode"/>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="zipCodes"
+              formControlName="pinCode"
+              placeholder="Select a Pincode"
+              [editable]="true"
+              optionLabel="pinCode" />
           </div>
-          <div>
-            <label class="text-sm" >Country <sup class="text-red-600">*</sup></label>
-            <input type="text" formControlName="country" placeholder="country"/>
-          </div>
+
         </div>
       </div>
 

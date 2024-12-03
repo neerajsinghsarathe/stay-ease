@@ -53,6 +53,36 @@ export class AccountPageService {
     return this.httpService.get(`${this.domainUrl}/Owner/Hotels/${this.ownerId}`, true);
   }
 
+  getAllCountries() {
+    return this.httpService.get(`${this.domainUrl}/countries`);
+  }
+
+  getAllStates() {
+    return this.httpService.get(`${this.domainUrl}/states`);
+  }
+
+  getAllCities() {
+    return this.httpService.get(`${this.domainUrl}/cities`);
+  }
+
+  getAllZipCodes() {
+    return this.httpService.get(`${this.domainUrl}/pincodes`);
+  }
+
+  getStatesByCountry(countryId: string) {
+    return this.httpService.get(`${this.domainUrl}/states/${countryId}`);
+  }
+
+  getCitiesByState(stateId: string) {
+    return this.httpService.get(`${this.domainUrl}/cities/${stateId}`);
+  }
+
+  getStateAndCityByZipCode(zipCode: string) {
+    return this.httpService.get(`${this.domainUrl}/pincode/${zipCode}`);
+  }
+
+
+
   checkAvailability(data: any) {
     return this.httpService.get(`${this.domainUrl}/Hotel/${data.hotelId}/Rooms/availability?checkInDate=${data.checkIn}&checkOutDate=${data.checkOut}&capacity=${data.capacity}`, true)
   }

@@ -7,6 +7,8 @@ import {PerksComponent} from '../../helpers/perks/perks.component';
 import {ToastService} from '../../helpers/toast/toast.service';
 import {PhotosUploaderComponent} from '../../helpers/photos-uploader/photos-uploader.component';
 import {AccountPageService} from '../account-page/account-page.service';
+import {DropdownChangeEvent, DropdownModule} from 'primeng/dropdown';
+import {type} from 'node:os';
 
 @Component({
   selector: 'app-places-form-page',
@@ -15,13 +17,18 @@ import {AccountPageService} from '../account-page/account-page.service';
     SpinnerModule,
     ReactiveFormsModule,
     PerksComponent,
-    PhotosUploaderComponent
+    PhotosUploaderComponent,
+    DropdownModule
   ],
   templateUrl: './places-form-page.component.html',
   styleUrl: './places-form-page.component.css'
 })
 export class PlacesFormPageComponent implements OnInit {
   @Input() place?: Place;
+  @Input() countries: any[] = [];
+  @Input() states: any[] = [];
+  @Input() cities: any[] = [];
+  @Input() zipCodes: any[] = [];
   formData: FormGroup;
   addedPhotos: any[] = [];
   loading = false;
@@ -115,4 +122,27 @@ export class PlacesFormPageComponent implements OnInit {
 
     }
   }
+
+  onCountryChange($event: DropdownChangeEvent) {
+    if (!$event.value) return;
+    let value;
+    if (typeof $event.value === 'string') {
+      value = this.countries.find((country) => country.countryName.includes($event.value))?.countryCode;
+    }
+    this.accountService.getStatesByCountry(value ?? $event.value.countryCode).subscribe((response: any) => {
+      this.states = response.data;
+    });
+  }
+
+  onStateChange($event: DropdownChangeEvent) {
+    if (!$event.value) return;
+    let value;
+    if (typeof $event.value === 'string') {
+      value = this.states.find((state) => state.stateName.includes($event.value))?.stateCode;
+    }
+    this.accountService.getCitiesByState(value ?? $event.value.stateCode).subscribe((response: any) => {
+      this.cities = response.data;
+    });
+  }
+
 }
