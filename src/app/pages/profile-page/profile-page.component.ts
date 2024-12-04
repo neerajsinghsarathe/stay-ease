@@ -6,6 +6,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
 import {AccountPageService} from '../account-page/account-page.service';
 import {ToastService} from '../../helpers/toast/toast.service';
+import {SpinnerComponent} from '../../helpers/spinner/spinner.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,7 +14,8 @@ import {ToastService} from '../../helpers/toast/toast.service';
   imports: [
     DialogModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    SpinnerComponent
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css'
@@ -37,11 +39,14 @@ export class ProfilePageComponent {
     profileImg: ''
   };
   viewEditProfileModal: boolean = false;
+  loading: boolean = false;
 
   constructor(private router: Router, private accountService: AccountPageService, private toastService: ToastService) {
+    this.loading = true;
     this.accountService.getUserDetails().subscribe({
       next: (response: any) => {
         this.user = new UserModel(response.data);
+        this.loading = false;
         if (this.user.id === 0) {
           this.goToLoginPage();
           throw new Error('User not found');
@@ -56,6 +61,7 @@ export class ProfilePageComponent {
           this.goToLoginPage();
           return;
         }
+        this.loading = false;
         this.toastService.showError(error.error.data);
       }
     });
