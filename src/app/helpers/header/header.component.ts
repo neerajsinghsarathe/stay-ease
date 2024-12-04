@@ -19,10 +19,12 @@ export class HeaderComponent implements OnInit{
   showSearchBar: boolean = true;
   hasShadow: boolean = true;
   user: any = {};
+  defaultRoute: any;
 
   constructor(private router: Router, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.defaultRoute = localStorage.getItem('role') === 'admin' ? '/dashboard' : '/';
     this.showSearchBar = !(this.router.url.includes('/account') || this.router.url.includes('/dashboard'));
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
