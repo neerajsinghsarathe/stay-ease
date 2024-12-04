@@ -29,6 +29,7 @@ export interface Room {
   capacity: number;
   totalAvailableRooms: number;
   roomDescription: string;
+  isActive: boolean;
 }
 
 export interface Review {

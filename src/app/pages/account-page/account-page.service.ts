@@ -77,11 +77,13 @@ export class AccountPageService {
     return this.httpService.get(`${this.domainUrl}/cities/${stateId}`);
   }
 
-  getStateAndCityByZipCode(zipCode: string) {
-    return this.httpService.get(`${this.domainUrl}/pincode/${zipCode}`);
+  addPlace(data: any) {
+    return this.httpService.post(`${this.domainUrl}/Hotel/createhotel`, data, true);
   }
 
-
+  updatePlace(data: any) {
+    return this.httpService.put(`${this.domainUrl}/Hotel/updatehotel`, data, true);
+  }
 
   checkAvailability(data: any) {
     return this.httpService.get(`${this.domainUrl}/Hotel/${data.hotelId}/Rooms/availability?checkInDate=${data.checkIn}&checkOutDate=${data.checkOut}&capacity=${data.capacity}`, true)
@@ -90,5 +92,9 @@ export class AccountPageService {
   postReview(data: any) {
     data = {...data, UserID: this.userId, ReviewDate: new Date().toISOString()};
     return this.httpService.post(`${this.domainUrl}/postreview`, data, true);
+  }
+
+  getRoomsByPlace(_id: number) {
+    return this.httpService.get(`${this.domainUrl}/Owner/Hotels/${this.ownerId}/${_id}/rooms`, true);
   }
 }

@@ -1,0 +1,45 @@
+<div class="border rounded-md p-5 mt-3">
+  <form [formGroup]="formGroup">
+    <div>
+      <div class="flex justify-between">
+        <h2 class="mt-4 text-lg">Room Type <sup class="text-red-600 text-sm">*</sup></h2>
+        @if(submissionType !== 'Update') {
+          <button class="rounded-full bg-secondary py-2 px-5 border" (click)="removeRoomFromParent()">Delete</button>
+        }
+      </div>
+      <p class="text-sm text-gray-500">Room Type</p>
+      <input type="text" formControlName="roomType" placeholder="room type, for example: Deluxe Suite"/>
+    </div>
+
+    <div>
+      <h2 class="mt-4 text-lg">Room Description <sup class="text-red-600 text-sm">*</sup></h2>
+      <p class="text-sm text-gray-500">description of the room</p>
+      <textarea formControlName="roomDescription"></textarea>
+    </div>
+
+    <div class="grid grid-flow-row gap-4 grid-cols-2">
+      <div>
+        <h2 class="mt-4 text-lg">Room Capacity <sup class="text-red-600 text-sm">*</sup></h2>
+        <input type="number" formControlName="capacity" placeholder="room capacity, for example: 2"/>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-lg">Room Price <sup class="text-red-600 text-sm">*</sup></h2>
+        <input type="number" formControlName="price" placeholder="room price, for example: 100"/>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-lg">Total Available Rooms <sup class="text-red-600 text-sm">*</sup></h2>
+        <input type="number" formControlName="totalAvailableRooms" placeholder="total rooms, for example: 10"/>
+      </div>
+
+      <div>
+        <h2 class="mt-4 text-lg">Room Status <sup class="text-red-600 text-sm">*</sup></h2>
+        <select formControlName="isActive">
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>

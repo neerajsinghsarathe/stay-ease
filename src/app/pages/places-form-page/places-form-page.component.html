@@ -101,18 +101,22 @@
         <app-photos-uploader [addedPhotos]="addedPhotos" (photosChange)="addedPhotos = $event"></app-photos-uploader>
       </div>
 
-      <!--<div>
+      <div>
         <h2 class="mt-4 text-2xl">Rooms</h2>
         <p class="text-sm text-gray-500">add rooms to your place</p>
-        <app-rooms [rooms]="formData.get('rooms')?.value" (roomsChange)="formData.get('rooms')?.setValue($event)"></app-rooms>
-      </div>-->
+        @for (room of roomsFormArray().controls; track room; let i = $index) {
+          <app-rooms [formGroup]="getRoomFormGroup(i)" [index]="i" (removeRoom)="removeRoom($event)" [submissionType]="submissionType"></app-rooms>
+        }
+        <button type="button" class="mx-auto my-4 rounded-full bg-secondary py-2 px-5 border" (click)="addRoom()">Add Room</button>
+      </div>
 
-      <button type="submit" class="mx-auto my-4 flex rounded-full bg-primary py-3 px-20 text-xl font-semibold text-white">
+      <button type="submit" class="mx-auto my-4 flex rounded-full bg-primary py-3 px-20 text-xl font-semibold text-white" (click)="isSubmitted = true">
         Save
       </button>
     </form>
   </div>
-}
-@if (loading) {
-  <p-spinner></p-spinner>
+} @else {
+  <div class="py-52">
+    <app-spinner [isLoading]="loading"></app-spinner>
+  </div>
 }

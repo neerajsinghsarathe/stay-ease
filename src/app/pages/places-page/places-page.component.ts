@@ -44,7 +44,6 @@ export class PlacesPageComponent {
   constructor(private accountService: AccountPageService) {
     this.accountService.getAccommodations().subscribe((response: any) => {
       this.places = new PlaceModelList(response.data).places;
-      this.onPlaceFormModal();
     });
     this.accountService.getAllCountries().subscribe((response: any) => {
       this.countries = response.data;
