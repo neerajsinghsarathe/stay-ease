@@ -57,6 +57,8 @@ export class PlacePageComponent implements OnInit{
       this.indexPageService.getPlace(placeId).subscribe({
         next: (res: any) => {
           this.place = new PlaceModel(res.data);
+          this.place.price = this.place.rooms.reduce((acc, room) => room.price < acc ? room.price : acc , this.place.rooms[0].price);
+          console.log(this.place.price);
           this.rating = parseFloat(this.place.rating);
           this.getReviews();
         },
